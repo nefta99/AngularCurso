@@ -18,7 +18,9 @@ import { TablaProductoComponent } from './components/tabla-producto/tabla-produc
 
 import { ProductoServices } from './services/Producto.Services'
 
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
+import { BuscadorProductoNombreComponent } from './components/buscador-producto-nombre/buscador-producto-nombre.component';
+import { FiltradoProductoNombreComponent } from './components/filtrado-producto-nombre/filtrado-producto-nombre.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HttpModule } from '@angular/http'
     FetchDataComponent,
     ButtonAgregar,
     DiasSemana,
-    TablaProductoComponent
+    TablaProductoComponent,
+    BuscadorProductoNombreComponent,
+    FiltradoProductoNombreComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -40,7 +44,7 @@ import { HttpModule } from '@angular/http'
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
+      { path: 'filtradoProductoNombre', component: FiltradoProductoNombreComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'diaSemana', component: DiasSemana },
     ])
