@@ -13,9 +13,14 @@ export class ProductoServices {
   constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {
     this.urlBase = baseUrl;//para sacar el nombre del dominio
   }
-
+  ////////////////////////////////////METODOS/////////////////////////////////////////////////////////////
   public getProducto() {
     return this.http.get(this.urlBase + "api/Producto/listarProductos")
+      .map(res => res.json());
+  }
+  /******************************************************************************************************/
+  public getFiltroProductoPorNombre(nombre) {
+    return this.http.get(this.urlBase +"api/Producto/filtraProductoPorNombre/" + nombre)
       .map(res => res.json());
   }
 

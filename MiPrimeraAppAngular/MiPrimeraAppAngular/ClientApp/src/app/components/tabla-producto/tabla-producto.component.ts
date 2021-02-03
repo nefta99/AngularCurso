@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 //importamos el servicio
 import { ProductoServices } from '../../services/Producto.Services';
 @Component({
@@ -9,7 +9,7 @@ import { ProductoServices } from '../../services/Producto.Services';
 export class TablaProductoComponent implements OnInit {
 
   //definimos variable global
-  productos: any;
+  @Input() productos: any;
   cabeceras: string[] = ["Id Producto", "Nombre", "Precio", "Stock", "Nombre Categoria"];
   //                    I
   //                    v  tambien aqui definimos variables globales, en el mismo contructor

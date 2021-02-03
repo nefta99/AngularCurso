@@ -1,2 +1,2 @@
-<buscador-producto-nombre></buscador-producto-nombre>
-<tabla-producto></tabla-producto>
+<buscador-producto-nombre (limpiarButton)="limpiar($event)" (clickButton)="filtrarDatos($event)"></buscador-producto-nombre>
+<tabla-producto [productos]="productos" ></tabla-producto>
