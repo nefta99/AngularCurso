@@ -16,11 +16,15 @@ import { ButtonAgregar } from './components/button/Button.component';
 import { DiasSemana } from './components/DiasSemana/diasSemanas.component';
 import { TablaProductoComponent } from './components/tabla-producto/tabla-producto.component';
 
+/*Aqui se incluyen los servicios*/
 import { ProductoServices } from './services/Producto.Services'
-
+import { CategoriaService} from './services/categoria.service';
+/*fin del los servicios*/
 import { HttpModule } from '@angular/http';
 import { BuscadorProductoNombreComponent } from './components/buscador-producto-nombre/buscador-producto-nombre.component';
-import { FiltradoProductoNombreComponent } from './components/filtrado-producto-nombre/filtrado-producto-nombre.component'
+import { FiltradoProductoNombreComponent } from './components/filtrado-producto-nombre/filtrado-producto-nombre.component';
+import { BuscadorProductoCategoriasComponent } from './components/buscador-producto-categorias/buscador-producto-categorias.component';
+import { FiltradoProductoCategoriaComponent } from './components/filtrado-producto-categoria/filtrado-producto-categoria.component'
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { FiltradoProductoNombreComponent } from './components/filtrado-producto-
     DiasSemana,
     TablaProductoComponent,
     BuscadorProductoNombreComponent,
-    FiltradoProductoNombreComponent
+    FiltradoProductoNombreComponent,
+    BuscadorProductoCategoriasComponent,
+    FiltradoProductoCategoriaComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -43,14 +49,14 @@ import { FiltradoProductoNombreComponent } from './components/filtrado-producto-
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'filtradoProductoCategoria', component: FiltradoProductoCategoriaComponent, pathMatch: 'full' },
       { path: 'filtradoProductoNombre', component: FiltradoProductoNombreComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'diaSemana', component: DiasSemana },
     ])
   ],
   //providers: en esta parte van los servicios
-  providers: [ProductoServices],
+  providers: [ProductoServices, CategoriaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
