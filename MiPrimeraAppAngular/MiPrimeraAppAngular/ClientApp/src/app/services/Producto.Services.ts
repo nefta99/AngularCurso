@@ -23,5 +23,8 @@ export class ProductoServices {
     return this.http.get(this.urlBase +"api/Producto/filtraProductoPorNombre/" + nombre)
       .map(res => res.json());
   }
-
+/******************************************************************************************************/
+  public getFiltroProductoPorCategoria(idcategoria) {
+    return this.http.get(this.urlBase + "api/Producto/filtraProductoPorCategoria/" + idcategoria).map(res => res.json());
+  }
 }
