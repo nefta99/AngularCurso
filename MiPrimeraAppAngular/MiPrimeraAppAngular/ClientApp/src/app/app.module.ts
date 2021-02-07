@@ -18,13 +18,17 @@ import { TablaProductoComponent } from './components/tabla-producto/tabla-produc
 
 /*Aqui se incluyen los servicios*/
 import { ProductoServices } from './services/Producto.Services'
-import { CategoriaService} from './services/categoria.service';
+import { CategoriaService } from './services/categoria.service';
+import { PersonaService } from './services/persona.service';
 /*fin del los servicios*/
 import { HttpModule } from '@angular/http';
 import { BuscadorProductoNombreComponent } from './components/buscador-producto-nombre/buscador-producto-nombre.component';
 import { FiltradoProductoNombreComponent } from './components/filtrado-producto-nombre/filtrado-producto-nombre.component';
 import { BuscadorProductoCategoriasComponent } from './components/buscador-producto-categorias/buscador-producto-categorias.component';
-import { FiltradoProductoCategoriaComponent } from './components/filtrado-producto-categoria/filtrado-producto-categoria.component'
+import { FiltradoProductoCategoriaComponent } from './components/filtrado-producto-categoria/filtrado-producto-categoria.component';
+import { TablaPersonaComponent } from './components/tabla-persona/tabla-persona.component';
+import { BuscadorPersonaNombreCompletoComponent } from './components/buscador-persona-nombre-completo/buscador-persona-nombre-completo.component';
+import { FiltradoPersonaNombreCompletoComponent } from './components/filtrado-persona-nombre-completo/filtrado-persona-nombre-completo.component'
 
 @NgModule({
   declarations: [
@@ -40,7 +44,10 @@ import { FiltradoProductoCategoriaComponent } from './components/filtrado-produc
     BuscadorProductoNombreComponent,
     FiltradoProductoNombreComponent,
     BuscadorProductoCategoriasComponent,
-    FiltradoProductoCategoriaComponent
+    FiltradoProductoCategoriaComponent,
+    TablaPersonaComponent,
+    BuscadorPersonaNombreCompletoComponent,
+    FiltradoPersonaNombreCompletoComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -51,12 +58,12 @@ import { FiltradoProductoCategoriaComponent } from './components/filtrado-produc
     RouterModule.forRoot([
       { path: 'filtradoProductoCategoria', component: FiltradoProductoCategoriaComponent, pathMatch: 'full' },
       { path: 'filtradoProductoNombre', component: FiltradoProductoNombreComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'filtradoPersonaNombreCompleto', component: FiltradoPersonaNombreCompletoComponent },
       { path: 'diaSemana', component: DiasSemana },
     ])
   ],
   //providers: en esta parte van los servicios
-  providers: [ProductoServices, CategoriaService],
+  providers: [ProductoServices, CategoriaService, PersonaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
