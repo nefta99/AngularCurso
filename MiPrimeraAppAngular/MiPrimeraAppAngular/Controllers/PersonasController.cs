@@ -32,6 +32,39 @@ namespace MiPrimeraAppAngular.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Personas/filtrarPersona/{nombreCompleto?}")]
+        public IEnumerable<PersonaCLS>filtrarPersona(string nombreCompleto="")
+        {
+            List<PersonaCLS> listaPersona;
+            using ( BDRestauranteContext bd =  new BDRestauranteContext())
+            {
+                if (nombreCompleto == "")
+                {
+                    listaPersona = (from persona in bd.Persona
+                     where persona.Bhabilitado == 1
+                     select new PersonaCLS
+                     {
+                         iidpersona = persona.Iidpersona,
+                         nombreCompleto = persona.Nombre + " " + persona.Appaterno + " " + persona.Apmaterno,
+                         correo = persona.Correo
+                     }).ToList();
+                }
+                else
+                {
+                    listaPersona = (from persona in bd.Persona
+                                    where persona.Bhabilitado == 1
+                                    &&(persona.Nombre + " " + persona.Appaterno + " " + persona.Apmaterno).ToLower().Contains(nombreCompleto.ToLower())
+                                    select new PersonaCLS
+                                    {
+                                        iidpersona = persona.Iidpersona,
+                                        nombreCompleto = persona.Nombre + " " + persona.Appaterno + " " + persona.Apmaterno,
+                                        correo = persona.Correo
+                                    }).ToList();
+                }
+                return listaPersona;
+            }
+        }
 
     }
 }
