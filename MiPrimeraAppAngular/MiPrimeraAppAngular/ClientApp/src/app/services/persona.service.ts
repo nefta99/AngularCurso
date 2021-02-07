@@ -14,4 +14,9 @@ export class PersonaService {
   public getPersona() {
     return this.http.get(this.urlBase + "api/Persona/listarPersonas").map(res => res.json());
   }
+
+
+  public getPersonaFiltro(nombreCompleto) {
+    return this.http.get(this.urlBase + "api/Personas/filtrarPersona/" + nombreCompleto).map(res => res.json());
+  }
 }

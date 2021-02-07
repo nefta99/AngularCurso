@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { PersonaService} from '../../services/persona.service';
 @Component({
   selector: 'filtrado-persona-nombre-completo',
   templateUrl: './filtrado-persona-nombre-completo.component.html',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltradoPersonaNombreCompletoComponent implements OnInit {
 
-  constructor() { }
+  personas: any;
+  constructor(private personaService: PersonaService) { }
 
   ngOnInit() {
+  }
+
+  buscar(nombreCompleto) {
+    this.personaService.getPersonaFiltro(nombreCompleto.value).subscribe(res => this.personas=res);
   }
 
 }

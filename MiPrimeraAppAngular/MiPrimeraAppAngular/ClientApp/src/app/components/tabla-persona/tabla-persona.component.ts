@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { PersonaService } from '../../services/persona.service';
 @Component({
   selector: 'tabla-persona',
@@ -8,7 +8,7 @@ import { PersonaService } from '../../services/persona.service';
 export class TablaPersonaComponent implements OnInit {
 
 
-  personas: any;
+  @Input() personas: any;
   cabeceras :string[]=["Id prosona","Nombre Completo","Telefono","Correo"]
   constructor(private personaService: PersonaService) {
   }

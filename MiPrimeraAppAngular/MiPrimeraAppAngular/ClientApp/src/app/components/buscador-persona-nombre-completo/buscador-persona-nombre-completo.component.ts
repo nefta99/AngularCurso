@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'buscador-persona-nombre-completo',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuscadorPersonaNombreCompletoComponent implements OnInit {
 
-  constructor() { }
+  @Output() buscarNombre: EventEmitter<any>;
+
+  constructor() {
+    this.buscarNombre = new EventEmitter();
+  }
 
   ngOnInit() {
+  }
+
+  public buscar(nombreCompleto) {
+    //PARA conectarlo con el componente padre
+    this.buscarNombre.emit(nombreCompleto);
   }
 
 }
