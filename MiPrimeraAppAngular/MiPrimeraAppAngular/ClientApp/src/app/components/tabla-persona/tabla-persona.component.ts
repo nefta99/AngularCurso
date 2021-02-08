@@ -7,7 +7,7 @@ import { PersonaService } from '../../services/persona.service';
 })
 export class TablaPersonaComponent implements OnInit {
 
-
+  //Con @Input() hace que se haga la variable como una propiedad en el html
   @Input() personas: any;
   cabeceras :string[]=["Id prosona","Nombre Completo","Telefono","Correo"]
   constructor(private personaService: PersonaService) {

@@ -20,6 +20,8 @@ import { TablaProductoComponent } from './components/tabla-producto/tabla-produc
 import { ProductoServices } from './services/Producto.Services'
 import { CategoriaService } from './services/categoria.service';
 import { PersonaService } from './services/persona.service';
+import { UsuarioService } from './services/usuario.service';
+
 /*fin del los servicios*/
 import { HttpModule } from '@angular/http';
 import { BuscadorProductoNombreComponent } from './components/buscador-producto-nombre/buscador-producto-nombre.component';
@@ -28,7 +30,10 @@ import { BuscadorProductoCategoriasComponent } from './components/buscador-produ
 import { FiltradoProductoCategoriaComponent } from './components/filtrado-producto-categoria/filtrado-producto-categoria.component';
 import { TablaPersonaComponent } from './components/tabla-persona/tabla-persona.component';
 import { BuscadorPersonaNombreCompletoComponent } from './components/buscador-persona-nombre-completo/buscador-persona-nombre-completo.component';
-import { FiltradoPersonaNombreCompletoComponent } from './components/filtrado-persona-nombre-completo/filtrado-persona-nombre-completo.component'
+import { FiltradoPersonaNombreCompletoComponent } from './components/filtrado-persona-nombre-completo/filtrado-persona-nombre-completo.component';
+import { BuscadorUsuarioTipoUsuarioComponent } from './components/buscador-usuario-tipo-usuario/buscador-usuario-tipo-usuario.component';
+import { FiltradoUsuarioTipoUsuarioComponent } from './components/filtrado-usuario-tipo-usuario/filtrado-usuario-tipo-usuario.component';
+import { TablaUsuarioComponent } from './components/tabla-usuario/tabla-usuario.component'
 
 @NgModule({
   declarations: [
@@ -47,7 +52,10 @@ import { FiltradoPersonaNombreCompletoComponent } from './components/filtrado-pe
     FiltradoProductoCategoriaComponent,
     TablaPersonaComponent,
     BuscadorPersonaNombreCompletoComponent,
-    FiltradoPersonaNombreCompletoComponent
+    FiltradoPersonaNombreCompletoComponent,
+    BuscadorUsuarioTipoUsuarioComponent,
+    FiltradoUsuarioTipoUsuarioComponent,
+    TablaUsuarioComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -59,11 +67,11 @@ import { FiltradoPersonaNombreCompletoComponent } from './components/filtrado-pe
       { path: 'filtradoProductoCategoria', component: FiltradoProductoCategoriaComponent, pathMatch: 'full' },
       { path: 'filtradoProductoNombre', component: FiltradoProductoNombreComponent },
       { path: 'filtradoPersonaNombreCompleto', component: FiltradoPersonaNombreCompletoComponent },
-      { path: 'diaSemana', component: DiasSemana },
+      { path: 'filtradoUsuarioTipo', component: FiltradoUsuarioTipoUsuarioComponent },
     ])
   ],
   //providers: en esta parte van los servicios
-  providers: [ProductoServices, CategoriaService, PersonaService],
+  providers: [ProductoServices, CategoriaService, PersonaService, UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
