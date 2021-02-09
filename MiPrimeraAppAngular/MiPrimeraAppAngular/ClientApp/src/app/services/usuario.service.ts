@@ -14,4 +14,7 @@ export class UsuarioService {
   public getTipoUsuario() {
     return this.http.get(this.baseUrl + "api/Usuario/listarTipoUsuario").map(res => res.json());
   }
+  public getFiltrarUsuarioPorTipo(idTipo) {
+    return this.http.get(this.baseUrl + "api/Usuario/filtrarUsuarioPorTipo/" + idTipo).map(res => res.json());
+  }
 }

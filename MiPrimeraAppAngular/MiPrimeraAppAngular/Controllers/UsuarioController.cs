@@ -36,7 +36,7 @@ namespace MiPrimeraAppAngular.Controllers
         [Route("api/Usuario/listarUsuario")]
         public IEnumerable<UsuarioCLS> listarUsuario()
         {
-            using (BDRestauranteContext bd= new BDRestauranteContext())
+            using (BDRestauranteContext bd = new BDRestauranteContext())
             {
                 List<UsuarioCLS> listausuario = (from usuario in bd.Usuario
                                                  join persona in bd.Persona
@@ -44,6 +44,29 @@ namespace MiPrimeraAppAngular.Controllers
                                                  join tipousuario in bd.TipoUsuario
                                                  on usuario.Iidtipousuario equals tipousuario.Iidtipousuario
                                                  where usuario.Bhabilitado == 1
+                                                 select new UsuarioCLS
+                                                 {
+                                                     iidusurio = usuario.Iidusuario,
+                                                     nombreusuario = usuario.Nombreusuario,
+                                                     nombrePersona = persona.Nombre + " " + persona.Appaterno + " " + persona.Apmaterno,
+                                                     nombreTipoUsuario = tipousuario.Nombre
+                                                 }).ToList();
+                return listausuario;
+            }
+        }
+        [HttpGet]
+        [Route("api/Usuario/filtrarUsuarioPorTipo/{idTipo?}")]
+        public IEnumerable<UsuarioCLS> filtrarUsuarioPorTipo(int idTipo=0)
+        {
+            using (BDRestauranteContext bd = new BDRestauranteContext())
+            {
+                List<UsuarioCLS> listausuario = (from usuario in bd.Usuario
+                                                 join persona in bd.Persona
+                                                 on usuario.Iidpersona equals persona.Iidpersona
+                                                 join tipousuario in bd.TipoUsuario
+                                                 on usuario.Iidtipousuario equals tipousuario.Iidtipousuario
+                                                 where usuario.Bhabilitado == 1
+                                                 && usuario.Iidtipousuario==idTipo
                                                  select new UsuarioCLS
                                                  {
                                                      iidusurio = usuario.Iidusuario,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'filtrado-usuario-tipo-usuario',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltradoUsuarioTipoUsuarioComponent implements OnInit {
 
-  constructor() { }
+  usuarios: any;
+  constructor(private usuarioServices: UsuarioService) { }
 
   ngOnInit() {
   }
-
+  filtrar(tipoUsuario) {
+    if (tipoUsuario.value == "") {
+      this.usuarioServices.getUsuario().subscribe(data => this.usuarios = data);
+    }
+    else {
+      this.usuarioServices.getFiltrarUsuarioPorTipo(tipoUsuario.value).subscribe(data => this.usuarios = data);
+    }
+  }
 }

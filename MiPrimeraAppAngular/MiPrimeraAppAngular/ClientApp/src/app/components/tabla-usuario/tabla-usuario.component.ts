@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 @Component({
   selector: 'tabla-usuario',
@@ -6,7 +6,7 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrls: ['./tabla-usuario.component.css']
 })
 export class TablaUsuarioComponent implements OnInit {
-  usuarios: any;
+  @Input() usuarios: any;
   cabeceras: string[] = ["id usuario", "Nombre usuario", "Nombre completo persona", "Nombre tipo usuario"];
   constructor(private usuarioService: UsuarioService) {
   }

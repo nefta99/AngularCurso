@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import {  UsuarioService } from  '../../services/usuario.service';
 @Component({
   selector: 'buscador-usuario-tipo-usuario',
@@ -8,11 +8,17 @@ import {  UsuarioService } from  '../../services/usuario.service';
 export class BuscadorUsuarioTipoUsuarioComponent implements OnInit {
 
   tipoUsuarios: any;
-  constructor(private usuarioServices: UsuarioService) { }
+  @Output() tipoUsuario: EventEmitter<any>;
+  constructor(private usuarioServices: UsuarioService) {
+    this.tipoUsuario = new EventEmitter();
+  }
 
   ngOnInit() {
     //llamamos al servicio
     this.usuarioServices.getTipoUsuario().subscribe(res => this.tipoUsuarios = res);
   }
-
+  filtrar(tipo) {
+    //Para que se conecte con el componente padre
+    this.tipoUsuario.emit(tipo);
+  }
 }
