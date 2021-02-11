@@ -9,6 +9,7 @@ export class TablaPersonaComponent implements OnInit {
 
   //Con @Input() hace que se haga la variable como una propiedad en el html
   @Input() personas: any;
+  @Input() isMantenimiento = false;
   cabeceras :string[]=["Id prosona","Nombre Completo","Telefono","Correo"]
   constructor(private personaService: PersonaService) {
   }

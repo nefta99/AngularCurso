@@ -33,7 +33,9 @@ import { BuscadorPersonaNombreCompletoComponent } from './components/buscador-pe
 import { FiltradoPersonaNombreCompletoComponent } from './components/filtrado-persona-nombre-completo/filtrado-persona-nombre-completo.component';
 import { BuscadorUsuarioTipoUsuarioComponent } from './components/buscador-usuario-tipo-usuario/buscador-usuario-tipo-usuario.component';
 import { FiltradoUsuarioTipoUsuarioComponent } from './components/filtrado-usuario-tipo-usuario/filtrado-usuario-tipo-usuario.component';
-import { TablaUsuarioComponent } from './components/tabla-usuario/tabla-usuario.component'
+import { TablaUsuarioComponent } from './components/tabla-usuario/tabla-usuario.component';
+import { MantenimientoPersonaComponent } from './components/mantenimiento-persona/mantenimiento-persona.component';
+import { PersonaFormMantenimientoComponent } from './components/persona-form-mantenimiento/persona-form-mantenimiento.component'
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { TablaUsuarioComponent } from './components/tabla-usuario/tabla-usuario.
     FiltradoPersonaNombreCompletoComponent,
     BuscadorUsuarioTipoUsuarioComponent,
     FiltradoUsuarioTipoUsuarioComponent,
-    TablaUsuarioComponent
+    TablaUsuarioComponent,
+    MantenimientoPersonaComponent,
+    PersonaFormMantenimientoComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -68,6 +72,8 @@ import { TablaUsuarioComponent } from './components/tabla-usuario/tabla-usuario.
       { path: 'filtradoProductoNombre', component: FiltradoProductoNombreComponent },
       { path: 'filtradoPersonaNombreCompleto', component: FiltradoPersonaNombreCompletoComponent },
       { path: 'filtradoUsuarioTipo', component: FiltradoUsuarioTipoUsuarioComponent },
+      { path: 'mantenimiento-persona', component: MantenimientoPersonaComponent },
+      { path: 'mantenimiento-persona/:id', component: PersonaFormMantenimientoComponent }
     ])
   ],
   //providers: en esta parte van los servicios
