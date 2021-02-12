@@ -1,3 +1,38 @@
-<p>
-  persona-form-mantenimiento works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="persona" (ngSubmit)="guardarDatos()">
+
+      <div class="form-group">
+        <label>Id Persona</label>
+        <input type="text" class="form-control" readonly formControlName="iidpersona"/>
+      </div>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" />
+      </div>
+      <div class="form-group">
+        <label>Apellido Paterno</label>
+        <input type="text" class="form-control" formControlName="apPaterno" />
+      </div>
+      <div class="form-group">
+        <label>Apellido Materno</label>
+        <input type="text" class="form-control" formControlName="apMaterno"/>
+      </div>
+      <div class="form-group">
+        <label>Telefono</label>
+        <input type="text" class="form-control" formControlName="telefono"/>
+      </div>
+      <div class="form-group">
+        <label>Correo</label>
+        <input type="text" class="form-control" formControlName="correo" />
+      </div>
+      <div>
+        <input type="submit" value="Guardar" class="btn btn-primary"/>
+        <button [routerLink]="['/mantenimiento-persona']" class="btn btn-danger">Regresar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{{persona.valid}}
+
+
