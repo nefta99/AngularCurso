@@ -13,5 +13,9 @@ namespace MiPrimeraAppAngular.Clases
         public string correo { get; set; }
         public DateTime fechaNacimiento { get; set; }
         public int bhabilitado { get; set; }
+        // propiedades adicionales
+        public string nombre { get; set; }
+        public string  apPaterno { get; set; }
+        public string apMaterno { get; set; }
     }
 }

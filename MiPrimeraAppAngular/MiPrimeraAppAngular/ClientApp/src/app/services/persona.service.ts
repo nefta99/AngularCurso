@@ -19,4 +19,9 @@ export class PersonaService {
   public getPersonaFiltro(nombreCompleto) {
     return this.http.get(this.urlBase + "api/Personas/filtrarPersona/" + nombreCompleto).map(res => res.json());
   }
+
+  public agregarPersona(persona) {
+    var url = this.urlBase + "api/Persona/guadarPersona";
+    return this.http.post(url, persona).map(res => res.json());
+  }
 }

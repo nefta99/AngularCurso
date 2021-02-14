@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { PersonaService } from '../../services/persona.service';
+//router por codigo
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-persona-form-mantenimiento',
   templateUrl: './persona-form-mantenimiento.component.html',
@@ -9,7 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class PersonaFormMantenimientoComponent implements OnInit {
 
   persona: FormGroup;
-  constructor() {
+  constructor(private personaServices: PersonaService, private router: Router) {
     this.persona = new FormGroup(
       {
         'iidpersona': new FormControl("0"),
@@ -17,7 +19,7 @@ export class PersonaFormMantenimientoComponent implements OnInit {
         'apPaterno': new FormControl("", [Validators.required, Validators.maxLength(150)]),
         'apMaterno': new FormControl("", [Validators.required, Validators.maxLength(150)]),
         'telefono': new FormControl("", [Validators.required, Validators.maxLength(10)]),
-        'correo': new FormControl("", [Validators.required, Validators.maxLength(150)])
+        'correo': new FormControl("", [Validators.required, Validators.maxLength(150), Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z]{2,}$")])
       }
     );
   }
@@ -25,7 +27,9 @@ export class PersonaFormMantenimientoComponent implements OnInit {
   ngOnInit() {
   }
   guardarDatos() {
-
+    if (this.persona.valid == true) {
+      this.personaServices.agregarPersona(this.persona.value).subscribe(data => { this.router.navigate(["/mantenimiento-persona"]) });
+    }
   }
 
 }
