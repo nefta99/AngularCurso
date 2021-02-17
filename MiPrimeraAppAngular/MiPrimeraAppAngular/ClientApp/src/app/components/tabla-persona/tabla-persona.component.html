@@ -12,7 +12,7 @@
       <td>{{persona.telefono}}</td>
       <td>{{persona.correo}}</td>
       <td *ngIf="isMantenimiento==true">
-        <i class="glyphicon glyphicon-edit btn btn-primary"></i>
+        <i [routerLink]="['/persona-form-matenimiento',persona.iidpersona]" class="glyphicon glyphicon-edit btn btn-primary"></i>
         <i class="glyphicon glyphicon-trash btn btn-danger"></i>
       </td>
     </tr>

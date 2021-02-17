@@ -75,7 +75,7 @@ import { PersonaFormMantenimientoComponent } from './components/persona-form-man
       { path: 'filtradoPersonaNombreCompleto', component: FiltradoPersonaNombreCompletoComponent },
       { path: 'filtradoUsuarioTipo', component: FiltradoUsuarioTipoUsuarioComponent },
       { path: 'mantenimiento-persona', component: MantenimientoPersonaComponent },
-      { path: 'mantenimiento-persona/:id', component: PersonaFormMantenimientoComponent }
+      { path: 'persona-form-matenimiento/:id', component: PersonaFormMantenimientoComponent }
     ])
   ],
   //providers: en esta parte van los servicios

@@ -97,5 +97,27 @@ namespace MiPrimeraAppAngular.Controllers
             return rpta;
         }
 
+        [HttpGet]
+        [Route("api/Persona/recuperarPersona")]
+        public PersonaCLS recuperarPersona(int idpersona)
+        {
+            using (BDRestauranteContext db = new BDRestauranteContext())
+            {
+                PersonaCLS oPersonaCls = (from persona in db.Persona
+                                          where persona.Bhabilitado == 1
+                                          && persona.Iidpersona == idpersona
+                                          select new PersonaCLS
+                                          {
+                                              iidpersona = persona.Iidpersona,
+                                              nombre = persona.Nombre,
+                                              apPaterno = persona.Appaterno,
+                                              apMaterno = persona.Apmaterno,
+                                              telefono = persona.Telefono,
+                                              correo = persona.Correo
+                                          }).First();
+                return oPersonaCls;
+            }
+        }
+
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PersonaService } from '../../services/persona.service';
 //router por codigo
-import { Route, Router } from '@angular/router';
+import { Route, Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-persona-form-mantenimiento',
   templateUrl: './persona-form-mantenimiento.component.html',
@@ -11,7 +11,9 @@ import { Route, Router } from '@angular/router';
 export class PersonaFormMantenimientoComponent implements OnInit {
 
   persona: FormGroup;
-  constructor(private personaServices: PersonaService, private router: Router) {
+  titulo: string;
+  parametro: string;
+  constructor(private personaServices: PersonaService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.persona = new FormGroup(
       {
         'iidpersona': new FormControl("0"),
@@ -22,8 +24,18 @@ export class PersonaFormMantenimientoComponent implements OnInit {
         'correo': new FormControl("", [Validators.required, Validators.maxLength(150), Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z]{2,}$")])
       }
     );
+    this.activatedRoute.params.subscribe(parametro => {
+      this.parametro = parametro["id"];
+      if (this.parametro == "nuevo") {
+        this.titulo = "Agregando una nueva persona";
+      }
+      else {
+        this.titulo = "Editando una nueva persona";
+      }
+    });
   }
 
+  
   ngOnInit() {
   }
   guardarDatos() {
