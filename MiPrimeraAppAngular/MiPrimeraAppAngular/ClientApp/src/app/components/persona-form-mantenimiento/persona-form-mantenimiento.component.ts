@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+//hemos llamado al servicio PersonaService
 import { PersonaService } from '../../services/persona.service';
 //router por codigo
 import { Route, Router, ActivatedRoute } from '@angular/router';
@@ -21,7 +22,8 @@ export class PersonaFormMantenimientoComponent implements OnInit {
         'apPaterno': new FormControl("", [Validators.required, Validators.maxLength(150)]),
         'apMaterno': new FormControl("", [Validators.required, Validators.maxLength(150)]),
         'telefono': new FormControl("", [Validators.required, Validators.maxLength(10)]),
-        'correo': new FormControl("", [Validators.required, Validators.maxLength(150), Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z]{2,}$")])
+        'correo': new FormControl("", [Validators.required, Validators.maxLength(150), Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z]{2,}$")]),
+        'fechaNacimiento': new FormControl("")
       }
     );
     this.activatedRoute.params.subscribe(parametro => {
@@ -37,10 +39,34 @@ export class PersonaFormMantenimientoComponent implements OnInit {
 
   
   ngOnInit() {
+    //Programar obtener los varlores
+    if (this.parametro != "nuevo") {
+      this.personaServices.recuperarPersona(this.parametro).subscribe(param => {
+        //programar
+        this.persona.controls["iidpersona"].setValue(param.iidpersona);
+        this.persona.controls["nombre"].setValue(param.nombre);
+        this.persona.controls["apPaterno"].setValue(param.apPaterno);
+        this.persona.controls["apMaterno"].setValue(param.apMaterno);
+        this.persona.controls["telefono"].setValue(param.telefono);
+        this.persona.controls["correo"].setValue(param.correo);
+
+      });
+    }
   }
   guardarDatos() {
-    if (this.persona.valid == true) {
-      this.personaServices.agregarPersona(this.persona.value).subscribe(data => { this.router.navigate(["/mantenimiento-persona"]) });
+    //2009-10-12
+    //C# dd/mm/yyyy
+    var fechaNac = this.persona.controls["fechaNacimiento"].value.split("-");
+    var anio = fechaNac[0];
+    var mes = fechaNac[1];
+    var dia = fechaNac[2];
+    console.log("añio " + anio);
+    console.log("mes " + mes);
+    console.log("dia " + dia);
+    this.persona.controls["fechaNacimiento"].setValue(dia + "/" + mes + "/" + anio);
+    //siempre tiene que estar valido antes de agrgar o editar
+    if (this.persona.valid == true) {        
+        this.personaServices.agregarPersona(this.persona.value).subscribe(data => { this.router.navigate(["/mantenimiento-persona"]) });    
     }
   }
 

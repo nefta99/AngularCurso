@@ -5,7 +5,7 @@
 
       <div class="form-group">
         <label>Id Persona</label>
-        <input type="text" class="form-control" readonly formControlName="iidpersona"/>
+        <input type="text" class="form-control" readonly formControlName="iidpersona" />
       </div>
       <div class="form-group">
         <label>Nombre</label>
@@ -17,18 +17,22 @@
       </div>
       <div class="form-group">
         <label>Apellido Materno</label>
-        <input type="text" class="form-control" formControlName="apMaterno"/>
+        <input type="text" class="form-control" formControlName="apMaterno" />
       </div>
       <div class="form-group">
         <label>Telefono</label>
-        <input type="number" class="form-control" formControlName="telefono"/>
+        <input type="number" class="form-control" formControlName="telefono" />
       </div>
       <div class="form-group">
         <label>Correo</label>
         <input type="text" class="form-control" formControlName="correo" />
       </div>
+      <div class="form-group">
+        <label>Fecha nacimiento</label>
+        <input type="date" class="form-control" formControlName="fechaNacimiento" />
+      </div>
       <div>
-        <input [disabled]="!persona.valid" type="submit" value="Guardar" class="btn btn-primary"/>
+        <input [disabled]="!persona.valid" type="submit" value="Guardar" class="btn btn-primary" />
         <button [routerLink]="['/mantenimiento-persona']" class="btn btn-danger">Regresar</button>
       </div>
     </form>

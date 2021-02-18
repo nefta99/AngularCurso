@@ -75,19 +75,33 @@ namespace MiPrimeraAppAngular.Controllers
             {
                 using (BDRestauranteContext bd = new BDRestauranteContext())
                 {
-                    Persona oPersona = new Persona();
-                    oPersona.Iidpersona = oPersonaCLS.iidpersona;
-                    oPersona.Nombre = oPersonaCLS.nombre;
-                    oPersona.Appaterno = oPersonaCLS.apPaterno;
-                    oPersona.Apmaterno = oPersonaCLS.apMaterno;
-                    oPersona.Correo = oPersonaCLS.correo;
-                    oPersona.Telefono = oPersonaCLS.telefono;
-                    oPersona.Bhabilitado = 1;
-                    oPersona.Btieneusuario = 0;
-                    rpta = 1;
+                    if (oPersonaCLS.iidpersona == 0) {
+                        Persona oPersona = new Persona();
+                        oPersona.Iidpersona = oPersonaCLS.iidpersona;
+                        oPersona.Nombre = oPersonaCLS.nombre;
+                        oPersona.Appaterno = oPersonaCLS.apPaterno;
+                        oPersona.Apmaterno = oPersonaCLS.apMaterno;
+                        oPersona.Correo = oPersonaCLS.correo;
+                        oPersona.Telefono = oPersonaCLS.telefono;
+                        oPersona.Bhabilitado = 1;
+                        oPersona.Btieneusuario = 0;
+                        rpta = 1;
 
-                    bd.Persona.Add(oPersona);
-                    bd.SaveChanges();
+                        bd.Persona.Add(oPersona);
+                        bd.SaveChanges();
+                    }
+                    else
+                    {
+                        //recuperar toda la fila
+                        Persona oPersona = bd.Persona.Where(p => p.Iidpersona == oPersonaCLS.iidpersona).First();
+                        oPersona.Nombre = oPersonaCLS.nombre;
+                        oPersona.Appaterno = oPersonaCLS.apPaterno;
+                        oPersona.Apmaterno = oPersonaCLS.apMaterno;
+                        oPersona.Correo = oPersonaCLS.correo;
+                        oPersona.Telefono = oPersonaCLS.telefono;
+                        bd.SaveChanges();
+                        rpta = 1;
+                    }
                 }
             }
             catch (Exception ex)
@@ -98,14 +112,14 @@ namespace MiPrimeraAppAngular.Controllers
         }
 
         [HttpGet]
-        [Route("api/Persona/recuperarPersona")]
-        public PersonaCLS recuperarPersona(int idpersona)
+        [Route("api/Persona/recuperarPersona/{idPersona}")]
+        public PersonaCLS recuperarPersona(int idPersona)
         {
             using (BDRestauranteContext db = new BDRestauranteContext())
             {
                 PersonaCLS oPersonaCls = (from persona in db.Persona
                                           where persona.Bhabilitado == 1
-                                          && persona.Iidpersona == idpersona
+                                          && persona.Iidpersona == idPersona
                                           select new PersonaCLS
                                           {
                                               iidpersona = persona.Iidpersona,

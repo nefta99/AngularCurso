@@ -26,6 +26,6 @@ export class PersonaService {
   }
   //
   public recuperarPersona(idPersona) {
-    return this.http.get(this.urlBase + "api/Persona/recuperarPersona").map(res => res.json());
+    return this.http.get(this.urlBase + "api/Persona/recuperarPersona/" + idPersona).map(res => res.json());
   }
 }
