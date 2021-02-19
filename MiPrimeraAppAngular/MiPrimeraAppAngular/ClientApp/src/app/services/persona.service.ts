@@ -28,4 +28,7 @@ export class PersonaService {
   public recuperarPersona(idPersona) {
     return this.http.get(this.urlBase + "api/Persona/recuperarPersona/" + idPersona).map(res => res.json());
   }
+  public eliminar(idPersona) {
+    return this.http.get(this.urlBase + "api/Persona/eliminarPersona/" + idPersona).map(res => res.json());
+  }
 }

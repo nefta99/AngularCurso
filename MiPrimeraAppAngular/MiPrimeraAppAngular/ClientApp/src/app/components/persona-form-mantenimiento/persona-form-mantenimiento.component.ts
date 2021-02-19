@@ -23,7 +23,7 @@ export class PersonaFormMantenimientoComponent implements OnInit {
         'apMaterno': new FormControl("", [Validators.required, Validators.maxLength(150)]),
         'telefono': new FormControl("", [Validators.required, Validators.maxLength(10)]),
         'correo': new FormControl("", [Validators.required, Validators.maxLength(150), Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z]{2,}$")]),
-        'fechaNacimiento': new FormControl("")
+        'fechaNacimiento': new FormControl("", Validators.required)
       }
     );
     this.activatedRoute.params.subscribe(parametro => {
@@ -49,6 +49,8 @@ export class PersonaFormMantenimientoComponent implements OnInit {
         this.persona.controls["apMaterno"].setValue(param.apMaterno);
         this.persona.controls["telefono"].setValue(param.telefono);
         this.persona.controls["correo"].setValue(param.correo);
+        //var s = param.fechaCadena;
+        this.persona.controls["fechaNacimiento"].setValue(param.fechaCadena);
 
       });
     }
@@ -63,7 +65,7 @@ export class PersonaFormMantenimientoComponent implements OnInit {
     console.log("añio " + anio);
     console.log("mes " + mes);
     console.log("dia " + dia);
-    this.persona.controls["fechaNacimiento"].setValue(dia + "/" + mes + "/" + anio);
+    this.persona.controls["fechaNacimiento"].setValue(mes + "/" + dia + "/" + anio);
     //siempre tiene que estar valido antes de agrgar o editar
     if (this.persona.valid == true) {        
         this.personaServices.agregarPersona(this.persona.value).subscribe(data => { this.router.navigate(["/mantenimiento-persona"]) });    

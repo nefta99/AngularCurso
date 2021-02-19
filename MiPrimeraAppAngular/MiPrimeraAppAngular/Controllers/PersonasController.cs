@@ -85,6 +85,7 @@ namespace MiPrimeraAppAngular.Controllers
                         oPersona.Telefono = oPersonaCLS.telefono;
                         oPersona.Bhabilitado = 1;
                         oPersona.Btieneusuario = 0;
+                        oPersona.Fechanacimiento = oPersonaCLS.fechaNacimiento;
                         rpta = 1;
 
                         bd.Persona.Add(oPersona);
@@ -99,6 +100,7 @@ namespace MiPrimeraAppAngular.Controllers
                         oPersona.Apmaterno = oPersonaCLS.apMaterno;
                         oPersona.Correo = oPersonaCLS.correo;
                         oPersona.Telefono = oPersonaCLS.telefono;
+                        oPersona.Fechanacimiento = oPersonaCLS.fechaNacimiento;
                         bd.SaveChanges();
                         rpta = 1;
                     }
@@ -127,10 +129,34 @@ namespace MiPrimeraAppAngular.Controllers
                                               apPaterno = persona.Appaterno,
                                               apMaterno = persona.Apmaterno,
                                               telefono = persona.Telefono,
-                                              correo = persona.Correo
+                                              correo = persona.Correo,
+                                              fechaCadena = persona.Fechanacimiento != null ? ((DateTime)persona.Fechanacimiento).ToString("yyyy-MM-dd") : ""
                                           }).First();
                 return oPersonaCls;
             }
+        }
+        [HttpGet]
+        [Route("api/Persona/eliminarPersona/{idPersona}")]
+        public int eliminarPersona(int idPersona)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext bd = new BDRestauranteContext())
+                {
+                    Persona oPersona = bd.Persona.Where(p => p.Iidpersona == idPersona).First();
+                    oPersona.Bhabilitado = 0;
+                    bd.SaveChanges();
+                    rpta = 1;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                rpta = 0;
+            }
+            return rpta;
+            
         }
 
     }

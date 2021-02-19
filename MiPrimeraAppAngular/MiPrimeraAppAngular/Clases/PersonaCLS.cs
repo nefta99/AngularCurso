@@ -17,5 +17,9 @@ namespace MiPrimeraAppAngular.Clases
         public string nombre { get; set; }
         public string  apPaterno { get; set; }
         public string apMaterno { get; set; }
+        /// <summary>
+        /// año - mes - dia
+        /// </summary>
+        public string fechaCadena { get; set; }
     }
 }
