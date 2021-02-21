@@ -20,6 +20,9 @@
       <div class="form-group">
         <label>Precio</label>
         <input type="number" min="0" class="form-control" formControlName="precio" />
+        <div style="color:red" *ngIf="producto.controls['precio'].errors?.required">
+          El precio del producto es obligaratorio
+        </div>
       </div>
       <div class="form-group">
         <label>Categoria</label>
@@ -27,6 +30,9 @@
           <option value="">---Seleccione---</option>
           <option [value]="categoria.iidcategoria" *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
         </select>
+        <div style="color:red" *ngIf="producto.controls['idcategoria'].errors?.required">
+          La categoria del producto es obligaratorio
+        </div>
       </div>
       <div class="form-group">
         <label>Marca</label>
@@ -34,11 +40,16 @@
           <option value="">---Seleccione---</option>
           <option [value]="marca.iidmarca" *ngFor="let marca of marcas">{{marca.nombre}}</option>
         </select>
+        <div style="color:red" *ngIf="producto.controls['idmarca'].errors?.required">
+          La categoria del producto es obligaratorio
+        </div>
       </div>
       <div class="form-group">
         <label>stock</label>
-        <input type="number" min="0" class="form-control" formControlName="stock"/>
-
+        <input type="number" min="0" class="form-control" formControlName="stock" />
+        <div style="color:red" *ngIf="producto.controls['stock'].errors?.required">
+          El stock del producto es obligaratorio
+        </div>
       </div>
       <div>
           <input [disabled]="!producto.valid" type="submit" value="Enviar" class="btn btn-primary" />
