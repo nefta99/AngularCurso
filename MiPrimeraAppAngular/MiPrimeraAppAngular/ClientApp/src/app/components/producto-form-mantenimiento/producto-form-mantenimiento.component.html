@@ -9,7 +9,13 @@
       </div>
       <div class="form-group">
         <label>Nombre Producto</label>
-        <input type="text" class="form-control" formControlName="nombre"/>
+        <input type="text" class="form-control" formControlName="nombre" />
+        <div style="color:red" *ngIf="producto.controls['nombre'].errors?.required">
+          El nombre del producto es obligaratorio
+        </div>
+        <div style="color:red" *ngIf="producto.controls['nombre'].errors?.maxlength">
+          Supero la longuitud maxima
+        </div>
       </div>
       <div class="form-group">
         <label>Precio</label>

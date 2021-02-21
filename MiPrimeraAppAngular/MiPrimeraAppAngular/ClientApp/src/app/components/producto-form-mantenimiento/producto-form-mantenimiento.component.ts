@@ -41,6 +41,16 @@ export class ProductoFormMantenimientoComponent implements OnInit {
   ngOnInit() {
     this.productoServices.listarMarcas().subscribe(res => this.marcas = res);
     this.categoriaServices.getCategoria().subscribe(res => this.categorias = res);
+    if (this.parametro != "nuevo") {
+      this.productoServices.obtenerProductoPorId(this.parametro).subscribe(data => {
+        this.producto.controls["idproducto"].setValue(data.idproducto);
+        this.producto.controls["nombre"].setValue(data.nombre);
+        this.producto.controls["precio"].setValue(data.precio);
+        this.producto.controls["stock"].setValue(data.stock);
+        this.producto.controls["idmarca"].setValue(data.idmarca);
+        this.producto.controls["idcategoria"].setValue(data.idcategoria);
+      });
+    }
   }
 
 }
