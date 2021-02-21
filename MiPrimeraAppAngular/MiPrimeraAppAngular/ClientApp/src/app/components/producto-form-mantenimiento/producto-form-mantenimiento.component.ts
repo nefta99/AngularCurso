@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 //Llamamos el servicio
 import { ProductoServices } from '../../services/Producto.Services';
 import { CategoriaService } from '../../services/categoria.service';
@@ -13,7 +14,11 @@ export class ProductoFormMantenimientoComponent implements OnInit {
   producto: FormGroup;
   categorias: any;
   marcas: any;
-  constructor(private productoServices: ProductoServices, private categoriaServices: CategoriaService) {
+  titulo: string;
+  parametro: string;
+  
+  constructor(private productoServices: ProductoServices, private categoriaServices: CategoriaService,
+    private activatedRoute: ActivatedRoute) {
     this.producto = new FormGroup({
       'idproducto': new FormControl("0"),
       'nombre': new FormControl("", [Validators.required, Validators.maxLength(100)]),
@@ -22,6 +27,15 @@ export class ProductoFormMantenimientoComponent implements OnInit {
       'idmarca': new FormControl("", Validators.required),
       'idcategoria': new FormControl("", Validators.required)
     });
+    this.activatedRoute.params.subscribe(param => {
+      this.parametro = param["id"];
+      if (this.parametro == "nuevo") {
+        this.titulo = "Agregando un nuevo producto";
+      }
+      else {
+        this.titulo = "Editando un producto";
+      }
+    })
   }
 
   ngOnInit() {
