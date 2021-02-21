@@ -10,6 +10,7 @@ export class TablaProductoComponent implements OnInit {
 
   //definimos variable global
   @Input() productos: any;
+  @Input() isMantenimiento=false;
   cabeceras: string[] = ["Id Producto", "Nombre", "Precio", "Stock", "Nombre Categoria"];
   //                    I
   //                    v  tambien aqui definimos variables globales, en el mismo contructor

@@ -88,5 +88,22 @@ namespace MiPrimeraAppAngular.Controllers
 
             }
         }
+        [HttpGet]
+        [Route("ap/Producto/listarMarcas")]
+        public IEnumerable<MarcaCLS> listarMarcas()
+        {
+            using (BDRestauranteContext db = new BDRestauranteContext())
+            {
+                List<MarcaCLS> listarMarca = (from marca in db.Marca
+                                              where marca.Bhabilitado == 1
+                                              select new MarcaCLS
+                                              {
+                                                  iidmarca = marca.Iidmarca,
+                                                  nombre = marca.Nombre
+                                              }
+                                             ).ToList();
+                return listarMarca;
+            }
+        }
     }
 }

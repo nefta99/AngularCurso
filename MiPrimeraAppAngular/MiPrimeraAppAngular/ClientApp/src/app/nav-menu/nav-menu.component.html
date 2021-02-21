@@ -38,6 +38,11 @@
                 <span class='glyphicon glyphicon-th-list'></span> Mantenimiento persona
               </a>
             </li>
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/mantenimiento-producto"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-th-list'></span> Mantenimiento Producto
+              </a>
+            </li>
 
           </ul>
         </div>

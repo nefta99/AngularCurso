@@ -36,7 +36,9 @@ import { BuscadorUsuarioTipoUsuarioComponent } from './components/buscador-usuar
 import { FiltradoUsuarioTipoUsuarioComponent } from './components/filtrado-usuario-tipo-usuario/filtrado-usuario-tipo-usuario.component';
 import { TablaUsuarioComponent } from './components/tabla-usuario/tabla-usuario.component';
 import { MantenimientoPersonaComponent } from './components/mantenimiento-persona/mantenimiento-persona.component';
-import { PersonaFormMantenimientoComponent } from './components/persona-form-mantenimiento/persona-form-mantenimiento.component'
+import { PersonaFormMantenimientoComponent } from './components/persona-form-mantenimiento/persona-form-mantenimiento.component';
+import { MantenimientoProductoComponent } from './components/mantenimiento-producto/mantenimiento-producto.component';
+import { ProductoFormMantenimientoComponent } from './components/producto-form-mantenimiento/producto-form-mantenimiento.component'
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { PersonaFormMantenimientoComponent } from './components/persona-form-man
     FiltradoUsuarioTipoUsuarioComponent,
     TablaUsuarioComponent,
     MantenimientoPersonaComponent,
-    PersonaFormMantenimientoComponent
+    PersonaFormMantenimientoComponent,
+    MantenimientoProductoComponent,
+    ProductoFormMantenimientoComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -75,7 +79,10 @@ import { PersonaFormMantenimientoComponent } from './components/persona-form-man
       { path: 'filtradoPersonaNombreCompleto', component: FiltradoPersonaNombreCompletoComponent },
       { path: 'filtradoUsuarioTipo', component: FiltradoUsuarioTipoUsuarioComponent },
       { path: 'mantenimiento-persona', component: MantenimientoPersonaComponent },
-      { path: 'persona-form-matenimiento/:id', component: PersonaFormMantenimientoComponent }
+      { path: 'persona-form-matenimiento/:id', component: PersonaFormMantenimientoComponent },
+      { path: 'mantenimiento-producto', component: MantenimientoProductoComponent },
+      { path: 'producto-form-matenimiento/:id', component: ProductoFormMantenimientoComponent },
+
     ])
   ],
   //providers: en esta parte van los servicios
