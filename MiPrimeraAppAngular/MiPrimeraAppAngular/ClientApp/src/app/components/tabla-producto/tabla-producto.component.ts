@@ -10,7 +10,8 @@ export class TablaProductoComponent implements OnInit {
 
   //definimos variable global
   @Input() productos: any;
-  @Input() isMantenimiento=false;
+  @Input() isMantenimiento = false;
+  p: number = 1;
   cabeceras: string[] = ["Id Producto", "Nombre", "Precio", "Stock", "Nombre Categoria"];
   //                    I
   //                    v  tambien aqui definimos variables globales, en el mismo contructor
@@ -29,12 +30,14 @@ export class TablaProductoComponent implements OnInit {
     );
   }
   eliminarProducto(idProducto) {
-    this.producto.eliminarProducto(idProducto).subscribe(p => {
-      //
-      this.producto.getProducto().subscribe(
-        data => this.productos = data
-      );
-      //
-    });
+    if (confirm("¿Desea eliminar el registro?") == true) {
+      this.producto.eliminarProducto(idProducto).subscribe(p => {
+        //
+        this.producto.getProducto().subscribe(
+          data => this.productos = data
+        );
+        //
+      });
+    }
   }
 }
