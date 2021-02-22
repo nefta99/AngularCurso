@@ -23,7 +23,7 @@ namespace MiPrimeraAppAngular.Controllers
                 List<ProductoCLS> lista = (from producto in bd.Producto
                                            join categoria in bd.Categoria
                                            on producto.Iidcategoria equals categoria.Iidcategoria
-                                           where producto.Bhabilitado==1
+                                           where producto.Bhabilitado == 1
                                            select new ProductoCLS
                                            {
                                                idproducto = producto.Iidproducto,
@@ -48,7 +48,7 @@ namespace MiPrimeraAppAngular.Controllers
                 {
                     ProductoCLS oProductoCLS = (from producto in bd.Producto
                                                 where producto.Bhabilitado == 1
-                                                && producto.Iidproducto== idProducto
+                                                && producto.Iidproducto == idProducto
                                                 select new ProductoCLS
                                                 {
                                                     idproducto = producto.Iidproducto,
@@ -60,7 +60,7 @@ namespace MiPrimeraAppAngular.Controllers
                                                 }).First();
                     return oProductoCLS;
                 }
-            }catch(Exception es)
+            } catch (Exception es)
             {
                 return null;
             }
@@ -74,7 +74,7 @@ namespace MiPrimeraAppAngular.Controllers
                 List<ProductoCLS> lista = (from producto in bd.Producto
                                            join categoria in bd.Categoria
                                            on producto.Iidcategoria equals categoria.Iidcategoria
-                                           where producto.Bhabilitado==1
+                                           where producto.Bhabilitado == 1
                                            && producto.Nombre.ToLower().Contains(nombre.ToLower())
                                            select new ProductoCLS
                                            {
@@ -92,7 +92,7 @@ namespace MiPrimeraAppAngular.Controllers
         }
         [HttpGet]
         [Route("api/Producto/filtraProductoPorCategoria/{idcategoria}")]
-        public IEnumerable<ProductoCLS> filtraProductoPorCategoria(int  idcategoria)
+        public IEnumerable<ProductoCLS> filtraProductoPorCategoria(int idcategoria)
         {
             using (BDRestauranteContext bd = new BDRestauranteContext())
             {
@@ -100,7 +100,7 @@ namespace MiPrimeraAppAngular.Controllers
                                            join categoria in bd.Categoria
                                            on producto.Iidcategoria equals categoria.Iidcategoria
                                            where producto.Bhabilitado == 1
-                                           && producto.Iidcategoria==idcategoria
+                                           && producto.Iidcategoria == idcategoria
                                            select new ProductoCLS
                                            {
                                                idproducto = producto.Iidproducto,
@@ -131,6 +131,68 @@ namespace MiPrimeraAppAngular.Controllers
                                              ).ToList();
                 return listarMarca;
             }
+        }
+        [HttpPost]
+        [Route("api/Producto/registrarProducto")]
+        public int registrarProducto([FromBody]ProductoCLS oProductoCLS)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext bd = new BDRestauranteContext())
+                {
+                    if (oProductoCLS.idproducto == 0)
+                    {
+                        Producto oProducto = new Producto();
+                        oProducto.Nombre = oProductoCLS.nombre;
+                        oProducto.Precio = oProductoCLS.precio;
+                        oProducto.Stock = oProductoCLS.stock;
+                        oProducto.Iidmarca = oProductoCLS.idmarca;
+                        oProducto.Iidcategoria = oProductoCLS.idcategoria;
+                        bd.Producto.Add(oProducto);
+                        bd.SaveChanges();
+                        rpta = 1;
+
+                    }
+                    else
+                    {
+                        Producto oProducto = bd.Producto.Where(p => p.Iidproducto == oProductoCLS.idproducto).First();
+
+                        oProducto.Nombre = oProductoCLS.nombre;
+                        oProducto.Precio = oProductoCLS.precio;
+                        oProducto.Stock = oProductoCLS.stock;
+                        oProducto.Iidmarca = oProductoCLS.idmarca;
+                        oProducto.Iidcategoria = oProductoCLS.idcategoria;
+                        bd.SaveChanges();
+                        rpta = 1;
+                    }
+                }
+
+            } catch (Exception es)
+            {
+                rpta = 0;
+            }
+            return rpta;
+        }
+        [HttpGet]
+        [Route("api/Producto/eliminarProducto/{idProducto}")]
+        public int eliminarProducto(int idProducto)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext bd= new BDRestauranteContext())
+                {
+                    Producto oProducto = bd.Producto.Where(p => p.Iidproducto == idProducto).First();
+                    oProducto.Bhabilitado = 0;
+                    bd.SaveChanges();
+                }
+            }
+            catch (Exception es)
+            {
+                rpta = 0;
+            }
+            return rpta;
         }
     }
 }

@@ -27,6 +27,16 @@ export class ProductoServices {
     return this.http.get("ap/Producto/listarMarcas").map(res => res.json());
   }
 
+  public eliminarProducto(idProducto) {
+    return this.http.get("api/Producto/eliminarProducto/" + idProducto)
+      .map(res => res.json());
+  }
+
+
+  public registrarProducto(ProductoCLS) {
+    return this.http.post("api/Producto/registrarProducto", ProductoCLS)
+      .map(res => res.json());
+  }
   /******************************************************************************************************/
   public getFiltroProductoPorNombre(nombre) {
     return this.http.get(this.urlBase +"api/Producto/filtraProductoPorNombre/" + nombre)

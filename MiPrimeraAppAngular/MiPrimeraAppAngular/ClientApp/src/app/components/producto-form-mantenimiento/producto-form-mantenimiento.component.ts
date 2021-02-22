@@ -53,4 +53,14 @@ export class ProductoFormMantenimientoComponent implements OnInit {
     }
   }
 
+
+  guardarDatos() {
+    if (this.producto.valid == true) {
+      this.productoServices.registrarProducto(this.producto.value)
+        .subscribe(p => {
+
+        });
+    }
+
+  }
 }
