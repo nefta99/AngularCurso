@@ -149,6 +149,7 @@ namespace MiPrimeraAppAngular.Controllers
                         oProducto.Stock = oProductoCLS.stock;
                         oProducto.Iidmarca = oProductoCLS.idmarca;
                         oProducto.Iidcategoria = oProductoCLS.idcategoria;
+                        oProducto.Bhabilitado = 1;
                         bd.Producto.Add(oProducto);
                         bd.SaveChanges();
                         rpta = 1;

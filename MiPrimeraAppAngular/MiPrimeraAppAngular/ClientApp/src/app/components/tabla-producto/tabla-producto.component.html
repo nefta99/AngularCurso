@@ -16,7 +16,7 @@
       <td>{{producto.nombreCategoria}}</td>
       <td *ngIf="isMantenimiento==true">
         <i [routerLink]="['/producto-form-matenimiento',producto.idproducto]" class="glyphicon glyphicon-edit btn btn-primary"></i>
-        <i class="glyphicon glyphicon-trash btn btn-danger" ></i>
+        <i class="glyphicon glyphicon-trash btn btn-danger" (click)="eliminarProducto(producto.idproducto)"></i>
       </td>
     </tr>
 
