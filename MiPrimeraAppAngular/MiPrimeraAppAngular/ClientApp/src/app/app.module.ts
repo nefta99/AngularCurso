@@ -39,7 +39,9 @@ import { MantenimientoPersonaComponent } from './components/mantenimiento-person
 import { PersonaFormMantenimientoComponent } from './components/persona-form-mantenimiento/persona-form-mantenimiento.component';
 import { MantenimientoProductoComponent } from './components/mantenimiento-producto/mantenimiento-producto.component';
 import { ProductoFormMantenimientoComponent } from './components/producto-form-mantenimiento/producto-form-mantenimiento.component'
-import { NgxPaginationModule } from 'ngx-pagination'
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MantenimientoUsuarioComponent } from './components/mantenimiento-usuario/mantenimiento-usuario.component';
+import { UsuarioFormMantenimientoComponent } from './components/usuario-form-mantenimiento/usuario-form-mantenimiento.component'
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { NgxPaginationModule } from 'ngx-pagination'
     MantenimientoPersonaComponent,
     PersonaFormMantenimientoComponent,
     MantenimientoProductoComponent,
-    ProductoFormMantenimientoComponent
+    ProductoFormMantenimientoComponent,
+    MantenimientoUsuarioComponent,
+    UsuarioFormMantenimientoComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -84,6 +88,8 @@ import { NgxPaginationModule } from 'ngx-pagination'
       { path: 'persona-form-matenimiento/:id', component: PersonaFormMantenimientoComponent },
       { path: 'mantenimiento-producto', component: MantenimientoProductoComponent },
       { path: 'producto-form-matenimiento/:id', component: ProductoFormMantenimientoComponent },
+      { path: 'mantenimiento-usuario', component: MantenimientoUsuarioComponent },
+      { path: 'usuario-form-mantenimiento/:id', component: UsuarioFormMantenimientoComponent }
 
     ])
   ],

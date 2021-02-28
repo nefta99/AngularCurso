@@ -74,6 +74,7 @@ export class PersonaFormMantenimientoComponent implements OnInit {
   noRepetirCorreoInsertar(control: FormControl) {
 
     //Para retorna una promesa, esto se consume en la validacion del correo.
+    //Exactamente se conecta con esto: this.noRepetirCorreoInsertar.bind(this))
     var promesa = new Promise((resolve, reject) => {
       if (control.value != "" && control.value != null) {
         this.personaServices.validarCorreo(this.persona.controls["iidpersona"].value, control.value)
