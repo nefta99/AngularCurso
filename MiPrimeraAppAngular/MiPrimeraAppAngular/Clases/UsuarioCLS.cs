@@ -12,5 +12,9 @@ namespace MiPrimeraAppAngular.Clases
         public string nombrePersona { get; set; }
         public int bhabilitado { get; set; }
         public string nombreTipoUsuario { get; set; }
+        public int iidpersona   { get; set; }
+        public int iidTipousuario { get; set; }
+        public string contra { get; set; }
+        public string contra2 { get; set; }
     }
 }

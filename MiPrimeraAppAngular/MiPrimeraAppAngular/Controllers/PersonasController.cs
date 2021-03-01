@@ -66,6 +66,24 @@ namespace MiPrimeraAppAngular.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Persona/listarPersonaCombo")]
+        public IEnumerable<PersonaCLS> listarPersonaCombo()
+        {
+            using (BDRestauranteContext bd = new BDRestauranteContext())
+            {
+                IEnumerable<PersonaCLS> listarPersona = (from persona in bd.Persona
+                                                         where persona.Bhabilitado == 1
+                                                         && persona.Btieneusuario == 0
+                                                         select new PersonaCLS
+                                                         {
+                                                             iidpersona = persona.Iidpersona,
+                                                             nombreCompleto = persona.Nombre + " " + persona.Appaterno + " " + persona.Apmaterno
+                                                         }).ToList();
+                return listarPersona;
+            }
+        }
+
         [HttpPost]
         [Route("api/Persona/guadarPersona")]
         public int guadarPersona([FromBody]PersonaCLS oPersonaCLS)

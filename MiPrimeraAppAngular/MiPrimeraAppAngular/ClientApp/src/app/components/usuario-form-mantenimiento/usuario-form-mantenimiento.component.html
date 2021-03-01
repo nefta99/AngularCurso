@@ -1,35 +1,37 @@
 <h1>{{titulo}}</h1>
 <div class="row">
   <div class="col-md-12">
-    <form>
+    <form [formGroup]="usuario">
       <div class="form-group">
         <label> Id usuario</label>
-        <input type="text" readonly class="form-control" />
+        <input type="text" readonly class="form-control" formControlName="iidusurio" />
       </div>
       <div class="form-group">
         <label> Nombre del usuario</label>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" formControlName="nombreusuario"  />
       </div>
 
       <div class="form-group">
         <label>Ingrese contrasenia</label>
-        <input type="text" class="form-control" />
+        <input type="password" class="form-control" formControlName="contra" />
       </div>
 
       <div class="form-group">
         <label>Repita contrasenia</label>
-        <input type="text" class="form-control" />
+        <input type="password" class="form-control"  formControlName="contra2" />
       </div>
-      <div class="form-group">
+      <div class="form-group" formControlName="iidpersona">
         <label>Persona</label>
         <select class="form-control">
           <option value="">--Seleccione--</option>
+          <option [value]="persona.iidpersona" *ngFor="let persona of personas"> {{persona.nombreCompleto}}</option>
         </select>
       </div>
-      <div class="form-group">
+      <div class="form-group" formControlName="iidTipousuario">
         <label>Tipo de usuario</label>
         <select class="form-control">
           <option value=""> --Seleccione--</option>
+          <option [value]="tipoUsuario.iidtipoUsuario" *ngFor="let tipoUsuario of tipoUsuarios">{{tipoUsuario.nombre}}</option>
         </select>
       </div>
       <div>
