@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
 import { PersonaService } from '../../services/persona.service';
 @Component({
@@ -18,10 +18,11 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
     private personaServices: PersonaService) {
     this.usuario = new FormGroup({
       'iidusurio': new FormControl("0"),
-      'nombreusuario': new FormControl(""),
-      'contra': new FormControl(""),
-      'iidpersona': new FormControl(""),
-      'iidTipousuario': new FormControl("") 
+      'nombreusuario': new FormControl("", [Validators.required, Validators.maxLength(100)]),
+      'contra': new FormControl("", [Validators.required, , Validators.maxLength(100)]),
+      'contra2': new FormControl("", [Validators.required, , Validators.maxLength(100)]),
+      'iidpersona': new FormControl("", [Validators.required, , Validators.maxLength(100)]),
+      'iidTipousuario': new FormControl("",[]) 
 
     });
     ////////////////////////////////////////////////////
