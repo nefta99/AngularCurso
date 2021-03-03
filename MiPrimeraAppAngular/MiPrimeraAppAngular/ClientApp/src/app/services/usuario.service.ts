@@ -17,4 +17,7 @@ export class UsuarioService {
   public getFiltrarUsuarioPorTipo(idTipo) {
     return this.http.get(this.baseUrl + "api/Usuario/filtrarUsuarioPorTipo/" + idTipo).map(res => res.json());
   }
+  public validarUsuario(idUsuario, nombre) {
+    return this.http.get(this.baseUrl + "api/Usuario/validarUsuario/" + idUsuario + "/" + nombre).map(res => res.json());
+  }
 }

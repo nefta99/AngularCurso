@@ -31,6 +31,30 @@ namespace MiPrimeraAppAngular.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Usuario/validarUsuario/{idUsuario}/{nombre}")]
+        public int validarUsuario(int idUsuario, string nombre)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext bd = new BDRestauranteContext())
+                {
+                    if (idUsuario == 0)
+                    {
+                        rpta =bd.Usuario.Where(p => p.Nombreusuario.ToLower() == nombre.ToLower()).Count();
+                    }
+                    else
+                    {
+                        rpta = bd.Usuario.Where(p => p.Nombreusuario.ToLower() == nombre.ToLower() && p.Iidusuario!=idUsuario).Count();
+                    }
+                }
+            }catch(Exception ex)
+            {
+                rpta = 0;
+            }
+            return rpta;
+        }
 
         [HttpGet]
         [Route("api/Usuario/listarUsuario")]

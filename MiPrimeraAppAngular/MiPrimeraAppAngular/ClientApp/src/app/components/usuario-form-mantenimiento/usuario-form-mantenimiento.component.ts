@@ -18,11 +18,11 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
     private personaServices: PersonaService) {
     this.usuario = new FormGroup({
       'iidusurio': new FormControl("0"),
-      'nombreusuario': new FormControl("", [Validators.required, Validators.maxLength(100)]),
+      'nombreusuario': new FormControl("", [Validators.required, Validators.maxLength(100)], this.noRepetirUsuario.bind(this)),
       'contra': new FormControl("", [Validators.required, , Validators.maxLength(100)]),
-      'contra2': new FormControl("", [Validators.required, , Validators.maxLength(100)]),
-      'iidpersona': new FormControl("", [Validators.required, , Validators.maxLength(100)]),
-      'iidTipousuario': new FormControl("",[]) 
+      'contra2': new FormControl("", [Validators.required, , Validators.maxLength(100), this.validarContraIguales.bind(this)]),
+      'iidpersona': new FormControl("", [Validators.required]),
+      'iidTipousuario': new FormControl("", [Validators.required]) 
 
     });
     ////////////////////////////////////////////////////
@@ -52,6 +52,44 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
     else {
       this.titulo = "Editar usuario"
     }
+  }
+
+  validarContraIguales(control: FormControl) {
+    if (control.value != "" && control.value != null) {
+      if (this.usuario.controls["contra"].value != control.value) {
+        return { noIguales: true }
+      }
+      else {
+        return null;
+      }
+    }
+  }
+  ///////////////
+  noRepetirUsuario(control: FormControl) {
+
+    //Para retorna una promesa, esto se consume en la validacion del correo.
+    //Exactamente se conecta con esto: this.noRepetirCorreoInsertar.bind(this))
+    var promesa = new Promise((resolve, reject) => {
+      if (control.value != "" && control.value != null) {
+        this.usuarioServices.validarUsuario(this.usuario.controls["iidusurio"].value, control.value)
+          .subscribe(data => {
+            if (data == 1) {
+              resolve({ yaExiste: true })
+            }
+            else {
+              resolve(null)
+            }
+          });
+      }
+
+
+    });
+    return promesa;
+  }
+
+  //////////////
+  guardarDatos() {
+
   }
 
 }
