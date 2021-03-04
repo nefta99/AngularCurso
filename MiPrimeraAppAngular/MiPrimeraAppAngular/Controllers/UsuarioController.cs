@@ -42,18 +42,33 @@ namespace MiPrimeraAppAngular.Controllers
                 {
                     if (idUsuario == 0)
                     {
-                        rpta =bd.Usuario.Where(p => p.Nombreusuario.ToLower() == nombre.ToLower()).Count();
+                        rpta = bd.Usuario.Where(p => p.Nombreusuario.ToLower() == nombre.ToLower()).Count();
                     }
                     else
                     {
-                        rpta = bd.Usuario.Where(p => p.Nombreusuario.ToLower() == nombre.ToLower() && p.Iidusuario!=idUsuario).Count();
+                        rpta = bd.Usuario.Where(p => p.Nombreusuario.ToLower() == nombre.ToLower() && p.Iidusuario != idUsuario).Count();
                     }
                 }
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 rpta = 0;
             }
             return rpta;
+        }
+        [HttpGet]
+        [Route("api/Usuario/recuperarUsuario/{iidUsuario}")]
+        public UsuarioCLS recuperarUsuario(int iidUsuario)
+        {
+            using (BDRestauranteContext db = new BDRestauranteContext())
+            {
+                UsuarioCLS oUsuarioCLS = new UsuarioCLS();
+                Usuario oUsuario = db.Usuario.Where(p => p.Iidusuario == iidUsuario).First();
+                oUsuarioCLS.iidusurio = oUsuario.Iidusuario;
+                oUsuarioCLS.nombreusuario = oUsuario.Nombreusuario;
+                oUsuarioCLS.iidTipousuario =(int) oUsuario.Iidtipousuario;
+                return oUsuarioCLS;
+            } 
+
         }
 
         [HttpGet]

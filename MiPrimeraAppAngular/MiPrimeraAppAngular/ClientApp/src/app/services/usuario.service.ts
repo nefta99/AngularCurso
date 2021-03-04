@@ -20,4 +20,9 @@ export class UsuarioService {
   public validarUsuario(idUsuario, nombre) {
     return this.http.get(this.baseUrl + "api/Usuario/validarUsuario/" + idUsuario + "/" + nombre).map(res => res.json());
   }
+
+
+  public recuperarUsuario(idUsuario) {
+    return this.http.get(this.baseUrl + "api/Usuario/recuperarUsuario/" + idUsuario).map(res => res.json());
+  }
 }

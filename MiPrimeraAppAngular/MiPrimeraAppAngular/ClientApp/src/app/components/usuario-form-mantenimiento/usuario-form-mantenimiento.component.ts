@@ -14,6 +14,7 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
   titulo: string = "";
   tipoUsuarios: any;
   personas: any;
+  ver: boolean = true;
   constructor(private activatedRouter: ActivatedRoute, private usuarioServices: UsuarioService,
     private personaServices: PersonaService) {
     this.usuario = new FormGroup({
@@ -28,7 +29,25 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
     ////////////////////////////////////////////////////
     this.activatedRouter.params.subscribe(param => {
       this.parametro = param["id"];
+      if (this.parametro == "nuevo") {
+        this.ver = true;
+      }
+      else {
+        this.ver = false;
+        this.usuarioServices.recuperarUsuario(this.parametro).subscribe(data => {
+          this.usuario.controls["iidusurio"].setValue(data.iidusurio);
+          this.usuario.controls["nombreusuario"].setValue(data.nombreusuario);
+          this.usuario.controls["iidTipousuario"].setValue(data.iidTipousuario);
 
+          this.usuario.controls["contra"].setValue("1");
+          this.usuario.controls["contra2"].setValue("1");
+          this.usuario.controls["iidpersona"].setValue("1");
+        });
+
+
+     
+        
+      }
     });
 
 

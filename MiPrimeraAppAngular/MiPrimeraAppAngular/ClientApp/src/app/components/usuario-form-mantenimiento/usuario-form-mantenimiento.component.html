@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="ver==true">
         <label>Ingrese contrasenia</label>
         <input type="password" class="form-control" formControlName="contra" />
         <div style="color:red" *ngIf="usuario.controls['contra'].errors?.required">
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="ver==true">
         <label>Repita contrasenia</label>
         <input type="password" class="form-control" formControlName="contra2" />
         <div style="color:red" *ngIf="usuario.controls['contra2'].errors?.required">
@@ -45,7 +45,7 @@
          La contraseña no es igual a la de arriba
         </div>
       </div>
-      <div class="form-group" formControlName="iidpersona">
+      <div class="form-group" formControlName="iidpersona" *ngIf="ver==true">
         <label>Persona</label>
         <select class="form-control" formControlName="iidpersona">
           <option value="">--Seleccione--</option>
