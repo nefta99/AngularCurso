@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
 import { PersonaService } from '../../services/persona.service';
@@ -15,8 +15,11 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
   tipoUsuarios: any;
   personas: any;
   ver: boolean = true;
-  constructor(private activatedRouter: ActivatedRoute, private usuarioServices: UsuarioService,
-    private personaServices: PersonaService) {
+  constructor(private activatedRouter: ActivatedRoute,
+    private usuarioServices: UsuarioService,
+    private personaServices: PersonaService,
+    private router: Router) {
+    //Se  instancia el usuario
     this.usuario = new FormGroup({
       'iidusurio': new FormControl("0"),
       'nombreusuario': new FormControl("", [Validators.required, Validators.maxLength(100)], this.noRepetirUsuario.bind(this)),
@@ -50,17 +53,16 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
       }
     });
 
-
-
   }
+  //////Fin del contructor
 
   ngOnInit() {
-
+    //Metodo para llenar el combo de TipoUsuario
     this.usuarioServices.getTipoUsuario().subscribe(data => {
       this.tipoUsuarios = data;
     });
 
-
+    //Metodo para llenar el combo de Persona o iidpersona
     this.personaServices.getPersona().subscribe(data => {
       this.personas = data;
     });
@@ -72,7 +74,9 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
       this.titulo = "Editar usuario"
     }
   }
+  ///fin de ngOnInit
 
+  //Metodo para validar que las contraseñas no sean iguales
   validarContraIguales(control: FormControl) {
     if (control.value != "" && control.value != null) {
       if (this.usuario.controls["contra"].value != control.value) {
@@ -83,7 +87,7 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
       }
     }
   }
-  ///////////////
+  //////////Metodo para no repetir usuario/////
   noRepetirUsuario(control: FormControl) {
 
     //Para retorna una promesa, esto se consume en la validacion del correo.
@@ -106,9 +110,15 @@ export class UsuarioFormMantenimientoComponent implements OnInit {
     return promesa;
   }
 
-  //////////////
+  ////////Metodo para guardar los datos en la base de datos//////
   guardarDatos() {
-
+    if (this.usuario.valid == true) {
+      
+      this.usuarioServices.guardarDatos(this.usuario.value).subscribe(res => {
+        //Esta linea proviende de la libreria Router
+        this.router.navigate(["/mantenimiento-usuario"])
+      });
+    }
   }
 
 }

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using Microsoft.AspNetCore.Mvc;
 using MiPrimeraAppAngular.Clases;
 using MiPrimeraAppAngular.Models;
@@ -52,6 +55,59 @@ namespace MiPrimeraAppAngular.Controllers
             } catch (Exception ex)
             {
                 rpta = 0;
+            }
+            return rpta;
+        }
+        [HttpPost]
+        [Route("api/Usuario/guardarDatos")]
+        public int guardarDatos([FromBody]UsuarioCLS oUsuarioCLS)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext bd = new BDRestauranteContext())
+                {
+                    using (var transaccion = new TransactionScope())
+                    {
+                        if (oUsuarioCLS.iidusurio == 0)
+                        {
+                            //Agregar usuario
+                            Usuario oUsuario = new Usuario();
+                            oUsuario.Nombreusuario = oUsuarioCLS.nombreusuario;
+                            //cifrar contraseña
+                            SHA256Managed sha = new SHA256Managed();
+                            string clave = oUsuarioCLS.contra;
+                            byte[] dataNoCifrada = Encoding.Default.GetBytes(clave);
+                            byte[] dataCifrada = sha.ComputeHash(dataNoCifrada);
+                            string claveCifrada =BitConverter.ToString(dataCifrada).Replace("-", "");
+                            oUsuario.Contra = claveCifrada;
+                            oUsuario.Iidpersona = oUsuarioCLS.iidpersona;
+                            oUsuario.Iidtipousuario = oUsuarioCLS.iidTipousuario;
+                            oUsuario.Bhabilitado = 1;                            
+                            bd.Usuario.Add(oUsuario);
+
+                            //Modificar Persona (btieneUsuario de 0 a 1)
+
+                            Persona oPersona = bd.Persona.Where(p => p.Iidpersona == oUsuarioCLS.iidpersona).First();
+                            oPersona.Btieneusuario = 1;
+                            bd.SaveChanges();
+                            transaccion.Complete();
+                            rpta = 1;
+                        }
+                        else
+                        {
+                            Usuario oUsuario = bd.Usuario.Where(p => p.Iidusuario == oUsuarioCLS.iidusurio).First();
+                            oUsuario.Nombreusuario = oUsuarioCLS.nombreusuario;
+                            oUsuario.Iidtipousuario = oUsuarioCLS.iidTipousuario;
+                            bd.SaveChanges();
+                            transaccion.Complete();
+                            rpta = 1;
+                        }
+                    }
+                }
+            }catch(Exception es)
+            {
+
             }
             return rpta;
         }
