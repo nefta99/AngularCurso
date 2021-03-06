@@ -58,6 +58,29 @@ namespace MiPrimeraAppAngular.Controllers
             }
             return rpta;
         }
+        [HttpGet]
+        [Route("api/Usuario/eliminarUsuario/{idusuario}")]
+        public int eliminarUsuario(int idusuario)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext bd = new BDRestauranteContext())
+                {
+                    Usuario oUsuario = bd.Usuario.Where(p => p.Iidusuario == idusuario).First();
+                    oUsuario.Bhabilitado = 0;
+                    bd.SaveChanges();
+                    rpta = 1;
+                }
+            }
+            catch (Exception es)
+            {
+
+            }
+            return rpta;
+        }
+
+
         [HttpPost]
         [Route("api/Usuario/guardarDatos")]
         public int guardarDatos([FromBody]UsuarioCLS oUsuarioCLS)

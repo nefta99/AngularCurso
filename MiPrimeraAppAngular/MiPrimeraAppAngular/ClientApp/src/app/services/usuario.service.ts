@@ -29,4 +29,8 @@ export class UsuarioService {
   public guardarDatos(usuarioCLS) {
     return this.http.post(this.baseUrl + "api/Usuario/guardarDatos", usuarioCLS).map(res => res.json());
   }
+
+  public eliminarUsuario(idUsuario) {
+    return this.http.get(this.baseUrl + "api/Usuario/eliminarUsuario/" + idUsuario).map(res => res.json());
+  }
 }
