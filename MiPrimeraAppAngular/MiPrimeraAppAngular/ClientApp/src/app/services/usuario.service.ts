@@ -33,4 +33,7 @@ export class UsuarioService {
   public eliminarUsuario(idUsuario) {
     return this.http.get(this.baseUrl + "api/Usuario/eliminarUsuario/" + idUsuario).map(res => res.json());
   }
+  public login(usuario) {
+    return this.http.post(this.baseUrl + "api/Usuario/login", usuario).map(res => res.json());
+  }
 }

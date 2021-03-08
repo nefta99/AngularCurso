@@ -58,6 +58,23 @@ namespace MiPrimeraAppAngular.Controllers
             }
             return rpta;
         }
+        [HttpPost]
+        [Route("api/Usuario/login")]
+        public int login(UsuarioCLS oUsuarioCLS)
+        {
+            int rpta = 0;
+            using (BDRestauranteContext db = new BDRestauranteContext())
+            {
+                //cifrar contraseña
+                SHA256Managed sha = new SHA256Managed();
+                byte[] dataNoCifrada = Encoding.Default.GetBytes(oUsuarioCLS.contra);
+                byte[] dataCifrada = sha.ComputeHash(dataNoCifrada);
+                string claveCifrada = BitConverter.ToString(dataCifrada).Replace("-", "");
+                rpta = db.Usuario.Where(p => p.Nombreusuario == oUsuarioCLS.nombreusuario && p.Contra == oUsuarioCLS.contra).Count();
+            }
+            return rpta;
+        }
+
         [HttpGet]
         [Route("api/Usuario/eliminarUsuario/{idusuario}")]
         public int eliminarUsuario(int idusuario)
