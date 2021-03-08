@@ -42,7 +42,12 @@ import { ProductoFormMantenimientoComponent } from './components/producto-form-m
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MantenimientoUsuarioComponent } from './components/mantenimiento-usuario/mantenimiento-usuario.component';
 import { UsuarioFormMantenimientoComponent } from './components/usuario-form-mantenimiento/usuario-form-mantenimiento.component';
-import { LoginComponent } from './components/login/login.component'
+import { LoginComponent } from './components/login/login.component';
+import { PaginaErrorLoginComponent } from './components/pagina-error-login/pagina-error-login.component';
+import { PermisoErrorPaginaComponent } from './components/permiso-error-pagina/permiso-error-pagina.component'
+
+//Guards
+import {SeguridadGuard } from './components/guards/seguridad.guard';
 
 @NgModule({
   declarations: [
@@ -71,7 +76,9 @@ import { LoginComponent } from './components/login/login.component'
     ProductoFormMantenimientoComponent,
     MantenimientoUsuarioComponent,
     UsuarioFormMantenimientoComponent,
-    LoginComponent
+    LoginComponent,
+    PaginaErrorLoginComponent,
+    PermisoErrorPaginaComponent
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -82,22 +89,24 @@ import { LoginComponent } from './components/login/login.component'
     ReactiveFormsModule,
     NgxPaginationModule ,
     RouterModule.forRoot([
-      { path: 'filtradoProductoCategoria', component: FiltradoProductoCategoriaComponent, pathMatch: 'full' },
-      { path: 'filtradoProductoNombre', component: FiltradoProductoNombreComponent },
-      { path: 'filtradoPersonaNombreCompleto', component: FiltradoPersonaNombreCompletoComponent },
-      { path: 'filtradoUsuarioTipo', component: FiltradoUsuarioTipoUsuarioComponent },
+      { path: 'filtradoProductoCategoria', component: FiltradoProductoCategoriaComponent, pathMatch: 'full', canActivate: [SeguridadGuard]},
+      { path: 'filtradoProductoNombre', component: FiltradoProductoNombreComponent, canActivate: [SeguridadGuard] },
+      { path: 'filtradoPersonaNombreCompleto', component: FiltradoPersonaNombreCompletoComponent, canActivate: [SeguridadGuard]},
+      { path: 'filtradoUsuarioTipo', component: FiltradoUsuarioTipoUsuarioComponent, canActivate: [SeguridadGuard]},
       { path: 'mantenimiento-persona', component: MantenimientoPersonaComponent },
       { path: 'persona-form-matenimiento/:id', component: PersonaFormMantenimientoComponent },
       { path: 'mantenimiento-producto', component: MantenimientoProductoComponent },
       { path: 'producto-form-matenimiento/:id', component: ProductoFormMantenimientoComponent },
       { path: 'mantenimiento-usuario', component: MantenimientoUsuarioComponent },
       { path: 'usuario-form-mantenimiento/:id', component: UsuarioFormMantenimientoComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'pagina-error', component: PaginaErrorLoginComponent },
+      { path: 'pagina-error-permiso', component: PermisoErrorPaginaComponent }
 
     ])
   ],
   //providers: en esta parte van los servicios
-  providers: [ProductoServices, CategoriaService, PersonaService, UsuarioService],
+  providers: [ProductoServices, CategoriaService, PersonaService, UsuarioService, SeguridadGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
