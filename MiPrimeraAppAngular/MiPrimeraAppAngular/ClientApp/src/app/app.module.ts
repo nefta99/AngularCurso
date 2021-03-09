@@ -48,6 +48,8 @@ import { PermisoErrorPaginaComponent } from './components/permiso-error-pagina/p
 
 //Guards
 import {SeguridadGuard } from './components/guards/seguridad.guard';
+import { ComponenteBienvenidaComponent } from './components/componente-bienvenida/componente-bienvenida.component';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import {SeguridadGuard } from './components/guards/seguridad.guard';
     UsuarioFormMantenimientoComponent,
     LoginComponent,
     PaginaErrorLoginComponent,
-    PermisoErrorPaginaComponent
+    PermisoErrorPaginaComponent,
+    ComponenteBienvenidaComponent
+    
   ],
   imports: [
     // el import va el HttpModule, lo que puso arriba
@@ -101,7 +105,8 @@ import {SeguridadGuard } from './components/guards/seguridad.guard';
       { path: 'usuario-form-mantenimiento/:id', component: UsuarioFormMantenimientoComponent },
       { path: 'login', component: LoginComponent },
       { path: 'pagina-error', component: PaginaErrorLoginComponent },
-      { path: 'pagina-error-permiso', component: PermisoErrorPaginaComponent }
+      { path: 'pagina-error-permiso', component: PermisoErrorPaginaComponent },
+      { path: 'componente-bienvenida', component: ComponenteBienvenidaComponent }
 
     ])
   ],

@@ -8,6 +8,9 @@ using System.Transactions;
 using Microsoft.AspNetCore.Mvc;
 using MiPrimeraAppAngular.Clases;
 using MiPrimeraAppAngular.Models;
+//importamos para la sessiones
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace MiPrimeraAppAngular.Controllers
 {
@@ -60,19 +63,50 @@ namespace MiPrimeraAppAngular.Controllers
         }
         [HttpPost]
         [Route("api/Usuario/login")]
-        public int login(UsuarioCLS oUsuarioCLS)
+        public UsuarioCLS login([FromBody]UsuarioCLS oUsuarioCLS)
         {
+            UsuarioCLS oUsuario = new UsuarioCLS();
             int rpta = 0;
             using (BDRestauranteContext db = new BDRestauranteContext())
             {
+                
                 //cifrar contraseña
                 SHA256Managed sha = new SHA256Managed();
                 byte[] dataNoCifrada = Encoding.Default.GetBytes(oUsuarioCLS.contra);
                 byte[] dataCifrada = sha.ComputeHash(dataNoCifrada);
                 string claveCifrada = BitConverter.ToString(dataCifrada).Replace("-", "");
-                rpta = db.Usuario.Where(p => p.Nombreusuario == oUsuarioCLS.nombreusuario && p.Contra == oUsuarioCLS.contra).Count();
+                rpta = db.Usuario.Where(p => p.Nombreusuario.ToUpper() == oUsuarioCLS.nombreusuario.ToUpper() && p.Contra == claveCifrada).Count();
+                if (rpta == 1)
+                {
+                    Usuario oUsuarioRecuperar = db.Usuario.Where(p => p.Nombreusuario.ToUpper() == oUsuarioCLS.nombreusuario.ToUpper() && p.Contra == claveCifrada).First();
+                    HttpContext.Session.SetString("usuario", oUsuarioRecuperar.Iidusuario.ToString());
+                    //
+                    oUsuario.iidusurio = oUsuarioRecuperar.Iidusuario;
+                    oUsuario.nombreusuario = oUsuarioRecuperar.Nombreusuario;
+                }
+                else
+                {
+                    oUsuario.iidusurio = 0;
+                    oUsuario.nombreusuario = "";
+                }
             }
-            return rpta;
+            return oUsuario;
+        }
+        [HttpGet]
+        [Route("api/Usuario/obtenerVariableSession")]
+        public SeguridadCLS obtenerVariableSession()
+        {
+            SeguridadCLS oSeguridadCLS = new SeguridadCLS();
+            string variableSession = HttpContext.Session.GetString("usuario");
+            if (variableSession == null)
+            {
+                oSeguridadCLS.valor = "";
+            }
+            else
+            {
+                oSeguridadCLS.valor = variableSession;
+            }
+            return oSeguridadCLS;
         }
 
         [HttpGet]
