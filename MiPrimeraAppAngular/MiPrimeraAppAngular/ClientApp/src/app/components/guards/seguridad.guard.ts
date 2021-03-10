@@ -13,8 +13,7 @@ export class SeguridadGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    //this.router.navigate(["/pagina-error"])
-    //return false;
+ 
 
     return this.usuarioService.obtenerVariableSession();
   }

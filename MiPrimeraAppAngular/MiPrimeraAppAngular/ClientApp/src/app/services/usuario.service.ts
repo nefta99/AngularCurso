@@ -50,4 +50,23 @@ export class UsuarioService {
       }
     });
   }
+
+  public obtenerSession() {
+    return this.http.get("api/Usuario/obtenerVariableSession").map(res => {
+      var data = res.json();
+      var inf = data.valor;
+      if (inf == "") {        
+        return false;
+      }
+      else {
+        return true;
+      }
+    });
+  }
+
+  public cerrarSession() {
+    return this.http.get("api/Usuario/cerrarSession").map(res => res.json());
+  }
+
+
 }

@@ -61,6 +61,23 @@ namespace MiPrimeraAppAngular.Controllers
             }
             return rpta;
         }
+
+        [HttpGet]
+        [Route("api/Usuario/cerrarSession")]
+        public SeguridadCLS cerrarSession()
+        {
+            SeguridadCLS oSeguridadCLS = new SeguridadCLS();
+            try
+            {
+                HttpContext.Session.Remove("usuario");
+                oSeguridadCLS.valor = "OK";
+            }catch(Exception es)
+            {
+                oSeguridadCLS.valor = "";
+            }
+            return oSeguridadCLS;
+        }
+
         [HttpPost]
         [Route("api/Usuario/login")]
         public UsuarioCLS login([FromBody]UsuarioCLS oUsuarioCLS)
