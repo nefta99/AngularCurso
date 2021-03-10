@@ -91,4 +91,7 @@ export class UsuarioService {
   public listarTipoUsuario() {
     return this.http.get(this.baseUrl + "api/TipoUsuario/listarTipoUsuario").map(res => res.json());
   }
+  public listarPaginasTipoUsuario() {
+    return this.http.get(this.baseUrl + "api/TipoUsuario/listarPaginasTipoUsuario").map(res => res.json());
+  }
 }

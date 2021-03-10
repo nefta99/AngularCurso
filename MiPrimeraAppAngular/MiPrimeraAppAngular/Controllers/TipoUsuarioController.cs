@@ -33,5 +33,23 @@ namespace MiPrimeraAppAngular.Controllers
                 return listaTipoUsuario;
             }
         }
+        [HttpGet]
+        [Route("api/TipoUsuario/listarPaginasTipoUsuario")]
+
+        public List<PaginaCLS> listarPaginasTipoUsuario()
+        {
+            List<PaginaCLS> listaPagina = new List<PaginaCLS>();
+            using (BDRestauranteContext db = new BDRestauranteContext())
+            {
+                listaPagina = (from pagina in db.Pagina
+                               where pagina.Bhabilitado == 1
+                               select new PaginaCLS
+                               {
+                                   iidpagina = pagina.Iidpagina,
+                                   mensaje = pagina.Mensaje
+                               }).ToList();
+            }
+                return listaPagina;
+        }
     }
 }
