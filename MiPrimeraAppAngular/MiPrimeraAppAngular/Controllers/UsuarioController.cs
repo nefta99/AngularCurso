@@ -147,6 +147,27 @@ namespace MiPrimeraAppAngular.Controllers
             else
             {
                 oSeguridadCLS.valor = variableSession;
+                List<PaginaCLS> listaPaginas = new List<PaginaCLS>();
+                int idUsuario = int.Parse(HttpContext.Session.GetString("usuario"));
+                int idTipoUsuario= int.Parse(HttpContext.Session.GetString("tipoUsuario"));
+                using (BDRestauranteContext db = new BDRestauranteContext())
+                {
+                    listarPaginas = (from usuario in db.Usuario
+                                     join tipoUsuario in db.TipoUsuario
+                                     on usuario.Iidtipousuario equals
+                                     tipoUsuario.Iidtipousuario
+                                     join paginaTipo in db.PaginaTipoUsuario
+                                     on usuario.Iidtipousuario equals paginaTipo.Iidtipousuario
+                                     join pagina in db.Pagina
+                                     on paginaTipo.Iidpagina equals pagina.Iidpagina
+                                     where usuario.Iidusuario == idUsuario
+                                     && usuario.Iidtipousuario == idTipoUsuario
+                                     select new PaginaCLS
+                                     {
+                                         accion = pagina.Accion.Substring(1)
+                                     }).ToList();
+                    oSeguridadCLS.lista = listaPaginas;
+
             }
             return oSeguridadCLS;
         }
