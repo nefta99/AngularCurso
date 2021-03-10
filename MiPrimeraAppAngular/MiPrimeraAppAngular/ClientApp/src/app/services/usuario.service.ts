@@ -51,6 +51,10 @@ export class UsuarioService {
     });
   }
 
+  public listarPaginas() {
+    return this.http.get(this.baseUrl + "api/Usuario/listarPaginas").map(res=> res.json());
+  }
+
   public obtenerSession() {
     return this.http.get("api/Usuario/obtenerVariableSession").map(res => {
       var data = res.json();

@@ -61,6 +61,29 @@ namespace MiPrimeraAppAngular.Controllers
             }
             return rpta;
         }
+        [HttpGet]
+        [Route("api/Usuario/listarPaginas")]
+        public List<PaginaCLS> listarPaginas()
+        {
+            List<PaginaCLS> listarPagina = new List<PaginaCLS>();
+            int idTipoUsuario = int.Parse(HttpContext.Session.GetString("tipoUsuario"));
+            using (BDRestauranteContext bd = new BDRestauranteContext())
+            {
+                listarPagina = (from paginaTipo in bd.PaginaTipoUsuario
+                                join pagina in bd.Pagina
+                                on paginaTipo.Iidpagina equals pagina.Iidpagina
+                                where paginaTipo.Bhabilitado == 1
+                                && paginaTipo.Iidtipousuario == idTipoUsuario
+                                select new PaginaCLS
+                                {
+                                    iidpagina = pagina.Iidpagina,
+                                    accion = pagina.Accion,
+                                    mensaje = pagina.Mensaje,
+                                    bhabilitado = (int)pagina.Bhabilitado
+                                }).ToList();
+                return listarPagina;
+            }
+        }
 
         [HttpGet]
         [Route("api/Usuario/cerrarSession")]
@@ -70,6 +93,7 @@ namespace MiPrimeraAppAngular.Controllers
             try
             {
                 HttpContext.Session.Remove("usuario");
+                HttpContext.Session.Remove("tipoUsuario");
                 oSeguridadCLS.valor = "OK";
             }catch(Exception es)
             {
@@ -97,6 +121,7 @@ namespace MiPrimeraAppAngular.Controllers
                 {
                     Usuario oUsuarioRecuperar = db.Usuario.Where(p => p.Nombreusuario.ToUpper() == oUsuarioCLS.nombreusuario.ToUpper() && p.Contra == claveCifrada).First();
                     HttpContext.Session.SetString("usuario", oUsuarioRecuperar.Iidusuario.ToString());
+                    HttpContext.Session.SetString("tipoUsuario", oUsuarioRecuperar.Iidtipousuario.ToString());
                     //
                     oUsuario.iidusurio = oUsuarioRecuperar.Iidusuario;
                     oUsuario.nombreusuario = oUsuarioRecuperar.Nombreusuario;

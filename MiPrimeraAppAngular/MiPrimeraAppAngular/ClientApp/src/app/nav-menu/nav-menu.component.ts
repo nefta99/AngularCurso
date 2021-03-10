@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class NavMenuComponent implements OnInit {
   isExpanded = false;
   login: boolean = false;
-
+  menus: any;
 
   constructor(private usuarioServices: UsuarioService, private router: Router  ) {
 
@@ -22,7 +22,12 @@ export class NavMenuComponent implements OnInit {
   ngOnInit() {
     this.usuarioServices.obtenerSession().subscribe(data => {
       if (data) {
+
         this.login = true;
+        //Llamar a listar paginas
+        this.usuarioServices.listarPaginas().subscribe(dato => {
+          this.menus = dato;
+        });
       }
       else {
         this.login = false;

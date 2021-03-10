@@ -25,7 +25,7 @@ namespace MiPrimeraAppAngular
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromSeconds(100);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
