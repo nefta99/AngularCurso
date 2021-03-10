@@ -88,5 +88,7 @@ export class UsuarioService {
     return this.http.get("api/Usuario/cerrarSession").map(res => res.json());
   }
 
-
+  public listarTipoUsuario() {
+    return this.http.get(this.baseUrl + "api/TipoUsuario/listarTipoUsuario").map(res => res.json());
+  }
 }
