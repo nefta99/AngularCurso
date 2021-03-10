@@ -114,7 +114,7 @@ import { TablaTipoUsuarioComponent } from './components/tabla-tipo-usuario/tabla
       { path: 'pagina-error-permiso', component: PermisoErrorPaginaComponent },
       { path: 'componente-bienvenida', component: ComponenteBienvenidaComponent },
       { path: 'mantenimiento-tipoUsuario', component: MantenimientoTipoUsuarioComponent },
-      { path: 'tipo-usuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent }
+      { path: 'tipoUsuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent }
 
     ])
   ],

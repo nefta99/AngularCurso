@@ -15,7 +15,8 @@ export class TipoUsuarioFormMantenimientoComponent implements OnInit {
     this.tipoUsuario = new FormGroup({
       "iidtipousuario": new FormControl(""),
       "nombre": new FormControl("", [Validators.required, Validators.maxLength(100)]),
-      "descripcion": new FormControl("", [Validators.required, Validators.maxLength(100)])
+      "descripcion": new FormControl("", [Validators.required, Validators.maxLength(100)]),
+      "valores": new FormControl("")
     });
   }
 
@@ -28,5 +29,21 @@ export class TipoUsuarioFormMantenimientoComponent implements OnInit {
 
   guardarDatos() {
 
+  }
+  verCheck() {
+    var seleccionados = "";
+    var checks = document.getElementsByClassName("check");
+    var check;
+    for (var i = 0; i < check.length; i++) {
+      check = checks[i];
+      if (check.checked == true) {
+        seleccionados += check.name;
+        seleccionados +="$"
+      }
+    }
+    if (seleccionados != "") {
+      seleccionados = seleccionados.substring(0, seleccionados.length - 1);
+    }
+    this.tipoUsuario.controls["valores"].setValue(seleccionados);
   }
 }
