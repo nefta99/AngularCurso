@@ -147,9 +147,9 @@ namespace MiPrimeraAppAngular.Controllers
             else
             {
                 oSeguridadCLS.valor = variableSession;
-                List<PaginaCLS> listaPaginas = new List<PaginaCLS>();
+                List<PaginaCLS> listarPaginas = new List<PaginaCLS>();
                 int idUsuario = int.Parse(HttpContext.Session.GetString("usuario"));
-                int idTipoUsuario= int.Parse(HttpContext.Session.GetString("tipoUsuario"));
+                int idTipoUsuario = int.Parse(HttpContext.Session.GetString("tipoUsuario"));
                 using (BDRestauranteContext db = new BDRestauranteContext())
                 {
                     listarPaginas = (from usuario in db.Usuario
@@ -166,8 +166,10 @@ namespace MiPrimeraAppAngular.Controllers
                                      {
                                          accion = pagina.Accion.Substring(1)
                                      }).ToList();
-                    oSeguridadCLS.lista = listaPaginas;
+                    oSeguridadCLS.lista = listarPaginas;
 
+                }
+               
             }
             return oSeguridadCLS;
         }

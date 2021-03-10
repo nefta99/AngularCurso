@@ -37,7 +37,7 @@ export class UsuarioService {
   public login(usuario) {
     return this.http.post(this.baseUrl + "api/Usuario/login", usuario).map(res => res.json());
   }
-  public obtenerVariableSession() {
+  public obtenerVariableSession(next) {
     return this.http.get("api/Usuario/obtenerVariableSession").map(res => {
       var data = res.json();
       var inf = data.valor;
@@ -46,6 +46,22 @@ export class UsuarioService {
         return false;
       }
       else {
+        //Sacamos la pagina a la cual se quiere ingresar
+        var pagina = next["url"][0].path;
+        if (data.lista != null) {
+
+          //Sacamos las paginas   que viene de base de datos
+          var paginas = data.lista.map(pagina => pagina.accion);
+          //Si esta la pagina vs la lista de pagina eso quiere dicir que si tiene permisos
+          if (paginas.indexOf(pagina) > -1 && pagina != "Login")
+          {
+            return true;
+          }
+          else {
+            this.router.navigate(["/pagina-error-permiso"]);
+            return false;
+          }
+        }
         return true;
       }
     });
