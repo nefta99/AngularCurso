@@ -94,4 +94,7 @@ export class UsuarioService {
   public listarPaginasTipoUsuario() {
     return this.http.get(this.baseUrl + "api/TipoUsuario/listarPaginasTipoUsuario").map(res => res.json());
   }
+  public listarPaginasRecuperar(iidTipoUsuario) {
+    return this.http.get(this.baseUrl + "api/TipoUsuario/listarPaginasRecuperar/" + iidTipoUsuario).map(res => res.json());
+  }
 }

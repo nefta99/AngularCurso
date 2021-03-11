@@ -52,7 +52,7 @@ namespace MiPrimeraAppAngular.Controllers
             return listaPagina;
         }
         [HttpGet]
-        [Route("api/TipoUsuario/listarPaginasRecuperar")]
+        [Route("api/TipoUsuario/listarPaginasRecuperar/{iidTipoUsuario}")]
         public TipoUsuariosCLS listarPaginasRecuperar(int iidTipoUsuario)
         {
             TipoUsuariosCLS oTipoUsuariosCLS = new TipoUsuariosCLS();

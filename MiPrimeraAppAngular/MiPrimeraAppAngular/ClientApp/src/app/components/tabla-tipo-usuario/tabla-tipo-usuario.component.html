@@ -11,7 +11,7 @@
       <td>{{tipousuario.nombre}}</td>
       <td>{{tipousuario.descripcion}}</td>
       <td *ngIf="isMantenimiento==true">
-        <i [routerLink]="['/tipo-usuario-form-mantenimiento',tipousuario.iidtipoUsuario]" class="glyphicon glyphicon-edit btn btn-primary"></i>
+        <i [routerLink]="['/tipoUsuario-form-mantenimiento',tipousuario.iidtipoUsuario]" class="glyphicon glyphicon-edit btn btn-primary"></i>
         <i class="glyphicon glyphicon-trash btn btn-danger" (click)="eliminar(tipousuario.iidtipoUsuario)"></i>
       </td>
     </tr>
