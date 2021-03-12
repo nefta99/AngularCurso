@@ -103,4 +103,11 @@ export class UsuarioService {
   public eliminarTipoUsuario(iidTipoUsuario) {
     return this.http.get(this.baseUrl + "api/TipoUsuario/eliminarTipoUsuario/" + iidTipoUsuario).map(res => res.json());
   }
+
+
+  public listarPaginasBD() {
+    return this.http.get(this.baseUrl + "api/Pagina/listarPaginas").map(res => res.json());
+  }
+
+
 }

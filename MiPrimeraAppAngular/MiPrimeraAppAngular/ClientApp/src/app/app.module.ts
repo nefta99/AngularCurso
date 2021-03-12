@@ -52,6 +52,10 @@ import { ComponenteBienvenidaComponent } from './components/componente-bienvenid
 import { MantenimientoTipoUsuarioComponent } from './components/mantenimiento-tipo-usuario/mantenimiento-tipo-usuario.component';
 import { TipoUsuarioFormMantenimientoComponent } from './components/tipo-usuario-form-mantenimiento/tipo-usuario-form-mantenimiento.component';
 import { TablaTipoUsuarioComponent } from './components/tabla-tipo-usuario/tabla-tipo-usuario.component';
+import { MantenimientoPaginaComponent } from './components/mantenimiento-pagina/mantenimiento-pagina.component';
+import { PaginaFormMantenimientoComponent } from './components/pagina-form-mantenimiento/pagina-form-mantenimiento.component';
+import { TablaPaginaComponent } from './components/tabla-pagina/tabla-pagina.component';
+import { NoEncontroInformacionComponent } from './components/no-encontro-informacion/no-encontro-informacion.component';
 
 
 @NgModule({
@@ -87,7 +91,11 @@ import { TablaTipoUsuarioComponent } from './components/tabla-tipo-usuario/tabla
     ComponenteBienvenidaComponent,
     MantenimientoTipoUsuarioComponent,
     TipoUsuarioFormMantenimientoComponent,
-    TablaTipoUsuarioComponent
+    TablaTipoUsuarioComponent,
+    MantenimientoPaginaComponent,
+    PaginaFormMantenimientoComponent,
+    TablaPaginaComponent,
+    NoEncontroInformacionComponent
     
   ],
   imports: [
@@ -114,7 +122,10 @@ import { TablaTipoUsuarioComponent } from './components/tabla-tipo-usuario/tabla
       { path: 'pagina-error-permiso', component: PermisoErrorPaginaComponent },
       { path: 'componente-bienvenida', component: ComponenteBienvenidaComponent },
       { path: 'mantenimiento-tipoUsuario', component: MantenimientoTipoUsuarioComponent },
-      { path: 'tipoUsuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent }
+      { path: 'tipoUsuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent },
+      { path: 'mantenimiento-pagina', component: MantenimientoPaginaComponent },
+      { path: 'pagina-form-mantenimiento/:id', component: PaginaFormMantenimientoComponent }
+
 
     ])
   ],
