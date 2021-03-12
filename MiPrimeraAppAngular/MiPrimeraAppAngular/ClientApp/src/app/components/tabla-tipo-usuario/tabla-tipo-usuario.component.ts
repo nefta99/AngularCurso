@@ -20,7 +20,11 @@ export class TablaTipoUsuarioComponent implements OnInit {
   }
 
   eliminar(iidTipoUsuario) {
-
+    this.usuarioService.eliminarTipoUsuario(iidTipoUsuario).subscribe(res => {
+      this.usuarioService.listarTipoUsuario().subscribe(data => {
+        this.tipoUsuarios = data;
+      });
+    });
   }
 
 }

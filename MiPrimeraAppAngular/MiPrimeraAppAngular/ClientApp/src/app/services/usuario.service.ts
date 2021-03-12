@@ -97,4 +97,10 @@ export class UsuarioService {
   public listarPaginasRecuperar(iidTipoUsuario) {
     return this.http.get(this.baseUrl + "api/TipoUsuario/listarPaginasRecuperar/" + iidTipoUsuario).map(res => res.json());
   }
+  public guardarDatosTipoUsuario(tipoUsuarioCLS) {
+    return this.http.post(this.baseUrl + "api/TipoUsuario/guardarDatosTipoUsuario", tipoUsuarioCLS).map(res => res.json());
+  }
+  public eliminarTipoUsuario(iidTipoUsuario) {
+    return this.http.get(this.baseUrl + "api/TipoUsuario/eliminarTipoUsuario/" + iidTipoUsuario).map(res => res.json());
+  }
 }

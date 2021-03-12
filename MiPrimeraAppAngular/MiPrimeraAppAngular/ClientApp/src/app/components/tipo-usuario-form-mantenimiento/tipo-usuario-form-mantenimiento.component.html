@@ -8,18 +8,30 @@
 
       <div class="form-group">
         <label>Nombre tipo usuario</label>
-        <input type="text" formControlName="nombre" class="form-control"  />
+        <input type="text" formControlName="nombre" class="form-control" />
+        <div style="color:red" *ngIf="tipoUsuario.controls['nombre'].errors?.required">
+          El nombre del tipoUsuario es obligaratorio
+        </div>
+        <div style="color:red" *ngIf="tipoUsuario.controls['nombre'].errors?.maxlength">
+          El nombre sobrepasa la longitud maxima
+        </div>
       </div>
 
       <div class="form-group">
         <label>Descripcion tipo usuario</label>
         <input type="text" formControlName="descripcion" class="form-control" />
+        <div style="color:red" *ngIf="tipoUsuario.controls['descripcion'].errors?.required">
+          La descripcion del tipoUsuario es obligaratorio
+        </div>
+        <div style="color:red" *ngIf="tipoUsuario.controls['descripcion'].errors?.maxlength">
+          La descripcion  sobrepasa la longitud maxima
+        </div>
       </div>
 
       <div class="form-group">
         <label>Seleccione las paginas</label>
         <div *ngFor="let pagina of paginas">
-          <input class="check" [name]="pagina.iidpagina" type="checkbox" />
+          <input class="check" [name]="pagina.iidpagina" (change)="verCheck()" type="checkbox" />
           <label>{{pagina.mensaje}}</label>
         </div>
       </div>

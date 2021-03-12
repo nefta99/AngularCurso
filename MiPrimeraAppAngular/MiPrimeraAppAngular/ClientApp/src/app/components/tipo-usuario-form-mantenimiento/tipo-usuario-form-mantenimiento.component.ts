@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { UsuarioService } from '../../services/usuario.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
+
 @Component({
   selector: 'tipo-usuario-form-mantenimiento',
   templateUrl: './tipo-usuario-form-mantenimiento.component.html',
@@ -15,7 +16,8 @@ export class TipoUsuarioFormMantenimientoComponent implements OnInit {
   paginas: any;
   parametros: string;
   titulo: string;
-  constructor(private usuarioServices: UsuarioService, private activateRoute: ActivatedRoute) {
+  constructor(private usuarioServices: UsuarioService, private activateRoute: ActivatedRoute
+    , private router: Router) {
     this.tipoUsuario = new FormGroup({
       "iidtipousuario": new FormControl(""),
       "nombre": new FormControl("", [Validators.required, Validators.maxLength(100)]),
@@ -66,13 +68,17 @@ export class TipoUsuarioFormMantenimientoComponent implements OnInit {
 
 
   guardarDatos() {
-
+    if (this.tipoUsuario.valid == true) {
+      this.usuarioServices.guardarDatosTipoUsuario(this.tipoUsuario.value).subscribe(res => {
+        this.router.navigate(["/mantenimiento-tipoUsuario"])
+      });
+    }
   }
   verCheck() {
     var seleccionados = "";
     var checks = document.getElementsByClassName("check");
     var check;
-    for (var i = 0; i < check.length; i++) {
+    for (var i = 0; i < checks.length; i++) {
       check = checks[i];
       if (check.checked == true) {
         seleccionados += check.name;

@@ -53,15 +53,15 @@ namespace MiPrimeraAppAngular.Controllers
             return listaPagina;
         }
         [HttpPost]
-        [Route("api/TipoUsuario/guardarDatos")]
-        public int guardarDatos([FromBody]TipoUsuariosCLS oTipoUsuariosCLS)
+        [Route("api/TipoUsuario/guardarDatosTipoUsuario")]
+        public int guardarDatosTipoUsuario([FromBody]TipoUsuariosCLS oTipoUsuariosCLS)
         {
             int rpta = 0;
             try
             {
                 using (BDRestauranteContext db = new BDRestauranteContext())
                 {
-                    using (var transaccion =new TransactionScope())
+                    using (var transaccion = new TransactionScope())
                     {
                         if (oTipoUsuariosCLS.iidtipoUsuario == 0)
                         {
@@ -80,6 +80,7 @@ namespace MiPrimeraAppAngular.Controllers
                                 oPaginaTipoUsuario.Bhabilitado = 1;
                                 db.PaginaTipoUsuario.Add(oPaginaTipoUsuario);
                             }
+                            db.SaveChanges();
                             transaccion.Complete();
                             rpta = 1;
 
@@ -129,12 +130,35 @@ namespace MiPrimeraAppAngular.Controllers
                         }
                     }
                 }
+            } catch (Exception ex)
+            {
+                rpta = 0;
+            }
+            return rpta;
+        }
+
+        [HttpGet]
+        [Route("api/TipoUsuario/eliminarTipoUsuario/{iidTipoUsuario}")]
+        public int eliminarTipoUsuario(int iidTipoUsuario)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext db= new BDRestauranteContext())
+                {
+                    TipoUsuario oTipoUsuario = db.TipoUsuario.Where(p => p.Iidtipousuario == iidTipoUsuario).First();
+                    oTipoUsuario.Bhabilitado = 0;
+                    db.SaveChanges();
+                    rpta = 1;
+                }
             }catch(Exception ex)
             {
                 rpta = 0;
             }
             return rpta;
         }
+            
+
         [HttpGet]
         [Route("api/TipoUsuario/listarPaginasRecuperar/{iidTipoUsuario}")]
         public TipoUsuariosCLS listarPaginasRecuperar(int iidTipoUsuario)
