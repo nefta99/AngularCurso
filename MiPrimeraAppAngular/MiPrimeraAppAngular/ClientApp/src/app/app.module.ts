@@ -124,7 +124,8 @@ import { NoEncontroInformacionComponent } from './components/no-encontro-informa
       { path: 'mantenimiento-tipoUsuario', component: MantenimientoTipoUsuarioComponent },
       { path: 'tipoUsuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent },
       { path: 'mantenimiento-pagina', component: MantenimientoPaginaComponent },
-      { path: 'pagina-form-mantenimiento/:id', component: PaginaFormMantenimientoComponent }
+      { path: 'pagina-form-mantenimiento/:id', component: PaginaFormMantenimientoComponent },
+      { path: 'no-encontro-informacion', component: NoEncontroInformacionComponent }
 
 
     ])

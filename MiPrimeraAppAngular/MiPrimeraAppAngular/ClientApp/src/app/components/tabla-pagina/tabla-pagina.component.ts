@@ -9,9 +9,10 @@ export class TablaPaginaComponent implements OnInit {
   paginas: any;
   cabeceras: string[] = ["id pagina", "nombre pagina", "Accion"];
   @Input() isMantenimiento: boolean = false;
-  constructor() { }
+  constructor(private usuarioServices: UsuarioService) { }
 
   ngOnInit() {
+    this.usuarioServices.listarPaginasBD().subscribe(res => this.paginas = res);
   }
 
 }

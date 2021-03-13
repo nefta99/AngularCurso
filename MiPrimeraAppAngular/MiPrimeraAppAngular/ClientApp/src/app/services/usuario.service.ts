@@ -109,5 +109,15 @@ export class UsuarioService {
     return this.http.get(this.baseUrl + "api/Pagina/listarPaginasBD").map(res => res.json());
   }
 
+  public guardarPagina(paginaCLS) {
+    return this.http.post(this.baseUrl + "api/Pagina/guardarPagina", paginaCLS).map(res => res.json());
+  }
+  public recuperarPagina(idPagina) {
+    return this.http.get(this.baseUrl + "api/Pagina/recuperarPagina/" + idPagina).map(res => res.json());
+  }
+  public eliminarPagina(idPagina) {
+    return this.http.get(this.baseUrl + "api/Pagina/eliminarPagina/" + idPagina).map(res => res.json());
+  }
+
 
 }

@@ -69,7 +69,7 @@ namespace MiPrimeraAppAngular.Controllers
             return rpta;
         }
         [HttpGet]
-        [Route("api/Pagina/recuperarPagina")]
+        [Route("api/Pagina/recuperarPagina/{idPagina}")]
         public PaginaCLS recuperarPagina(int idPagina)
         {
             PaginaCLS oPaginaCLS = new PaginaCLS();
@@ -93,6 +93,27 @@ namespace MiPrimeraAppAngular.Controllers
                 oPaginaCLS.accion = null;
             }
             return oPaginaCLS;
+        }
+
+        [HttpGet]
+        [Route("api/Pagina/eliminarPagina/{idPagina}")]
+        public int eliminarPagina(int idPagina)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext db = new BDRestauranteContext())
+                {
+                    Pagina oPagina = db.Pagina.Where(p => p.Iidpagina == idPagina).First();
+                    oPagina.Bhabilitado = 0;
+                    db.SaveChanges();
+                    rpta = 1;
+                }
+            }catch(Exception ex)
+            {
+                rpta = 0;
+            }
+            return rpta;
         }
     }
 }
