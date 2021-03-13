@@ -48,7 +48,7 @@ namespace MiPrimeraAppAngular.Controllers
                         Pagina oPagina = new Pagina();
                         oPagina.Accion = oPaginaCLS.accion;
                         oPagina.Mensaje = oPaginaCLS.mensaje;
-                        oPagina.Bhabilitado = oPaginaCLS.bhabilitado;
+                        oPagina.Bhabilitado = 1;
                         db.Pagina.Add(oPagina);
                         db.SaveChanges();
                         rpta = 1;

@@ -121,10 +121,10 @@ import { NoEncontroInformacionComponent } from './components/no-encontro-informa
       { path: 'pagina-error', component: PaginaErrorLoginComponent },
       { path: 'pagina-error-permiso', component: PermisoErrorPaginaComponent },
       { path: 'componente-bienvenida', component: ComponenteBienvenidaComponent },
-      { path: 'mantenimiento-tipoUsuario', component: MantenimientoTipoUsuarioComponent },
-      { path: 'tipoUsuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent },
-      { path: 'mantenimiento-pagina', component: MantenimientoPaginaComponent },
-      { path: 'pagina-form-mantenimiento/:id', component: PaginaFormMantenimientoComponent },
+      { path: 'mantenimiento-tipoUsuario', component: MantenimientoTipoUsuarioComponent, canActivate: [SeguridadGuard] },
+      { path: 'tipoUsuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent, canActivate: [SeguridadGuard] },
+      { path: 'mantenimiento-pagina', component: MantenimientoPaginaComponent, canActivate: [SeguridadGuard] },
+      { path: 'pagina-form-mantenimiento/:id', component: PaginaFormMantenimientoComponent, canActivate: [SeguridadGuard] },
       { path: 'no-encontro-informacion', component: NoEncontroInformacionComponent }
 
 

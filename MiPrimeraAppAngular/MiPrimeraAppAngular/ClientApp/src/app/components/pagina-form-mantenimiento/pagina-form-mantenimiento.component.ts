@@ -20,12 +20,12 @@ export class PaginaFormMantenimientoComponent implements OnInit {
     });
 
     this.activateRouter.params.subscribe(param => {
-      this.parametro = param["Id"];
+      this.parametro = param["id"];
       if (this.parametro != "nuevo") {
         this.titulo = "Editar pagina";
       }
       else {
-        this.titulo = "Agragr pagina";
+        this.titulo = "Agragar pagina";
       }
     });
   }
