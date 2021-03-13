@@ -35,5 +35,64 @@ namespace MiPrimeraAppAngular.Controllers
 
             }
         }
+        [HttpPost]
+        [Route("api/Pagina/guardarPagina")]
+        public int guardarPagina([FromBody] PaginaCLS oPaginaCLS)
+        {
+            int rpta = 0;
+            try
+            {
+                using (BDRestauranteContext db= new BDRestauranteContext()) { 
+                    if (oPaginaCLS.iidpagina == 0)
+                    {
+                        Pagina oPagina = new Pagina();
+                        oPagina.Accion = oPaginaCLS.accion;
+                        oPagina.Mensaje = oPaginaCLS.mensaje;
+                        oPagina.Bhabilitado = oPaginaCLS.bhabilitado;
+                        db.Pagina.Add(oPagina);
+                        db.SaveChanges();
+                        rpta = 1;
+                    }
+                    else
+                    {
+                        Pagina oPagina = db.Pagina.Where(p => p.Iidpagina == oPaginaCLS.iidpagina).First();
+                        oPagina.Accion = oPaginaCLS.accion;
+                        oPagina.Mensaje = oPaginaCLS.mensaje;
+                        db.SaveChanges();
+                        rpta = 1;
+                    }
+                }
+            } catch (Exception ex)
+            {
+
+            }
+            return rpta;
+        }
+        [HttpGet]
+        [Route("api/Pagina/recuperarPagina")]
+        public PaginaCLS recuperarPagina(int idPagina)
+        {
+            PaginaCLS oPaginaCLS = new PaginaCLS();
+            try
+            {
+                using (BDRestauranteContext db = new BDRestauranteContext())
+                {
+                    oPaginaCLS = (from pagina in db.Pagina
+                                  where pagina.Bhabilitado == 1
+                                  select new PaginaCLS
+                                  {
+                                      iidpagina = pagina.Iidpagina,
+                                      accion = pagina.Accion,
+                                      mensaje = pagina.Mensaje
+                                  }).First();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                oPaginaCLS.accion = null;
+            }
+            return oPaginaCLS;
+        }
     }
 }

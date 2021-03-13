@@ -106,7 +106,7 @@ export class UsuarioService {
 
 
   public listarPaginasBD() {
-    return this.http.get(this.baseUrl + "api/Pagina/listarPaginas").map(res => res.json());
+    return this.http.get(this.baseUrl + "api/Pagina/listarPaginasBD").map(res => res.json());
   }
 
 
