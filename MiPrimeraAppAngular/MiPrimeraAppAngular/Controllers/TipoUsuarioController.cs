@@ -173,6 +173,7 @@ namespace MiPrimeraAppAngular.Controllers
                                                 on paginasTipoUsu.Iidpagina equals
                                                 pagina.Iidpagina
                                                 where paginasTipoUsu.Iidtipousuario == iidTipoUsuario
+                                                && paginasTipoUsu.Bhabilitado==1
                                                 select new PaginaCLS
                                                 {
                                                     iidpagina = pagina.Iidpagina

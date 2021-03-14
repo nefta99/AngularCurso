@@ -124,7 +124,7 @@ import { NoEncontroInformacionComponent } from './components/no-encontro-informa
       { path: 'mantenimiento-tipoUsuario', component: MantenimientoTipoUsuarioComponent, canActivate: [SeguridadGuard] },
       { path: 'tipoUsuario-form-mantenimiento/:id', component: TipoUsuarioFormMantenimientoComponent, canActivate: [SeguridadGuard] },
       { path: 'mantenimiento-pagina', component: MantenimientoPaginaComponent, canActivate: [SeguridadGuard] },
-      { path: 'pagina-form-mantenimiento/:id', component: PaginaFormMantenimientoComponent, canActivate: [SeguridadGuard] },
+      { path: 'pagina-form-mantenimiento/:id', component: PaginaFormMantenimientoComponent,  canActivate: [SeguridadGuard] },
       { path: 'no-encontro-informacion', component: NoEncontroInformacionComponent }
 
 

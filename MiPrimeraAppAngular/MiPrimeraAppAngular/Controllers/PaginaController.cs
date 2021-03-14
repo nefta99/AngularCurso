@@ -48,6 +48,7 @@ namespace MiPrimeraAppAngular.Controllers
                         Pagina oPagina = new Pagina();
                         oPagina.Accion = oPaginaCLS.accion;
                         oPagina.Mensaje = oPaginaCLS.mensaje;
+                        oPagina.Vbisible = oPaginaCLS.bvisible;
                         oPagina.Bhabilitado = 1;
                         db.Pagina.Add(oPagina);
                         db.SaveChanges();
@@ -58,6 +59,7 @@ namespace MiPrimeraAppAngular.Controllers
                         Pagina oPagina = db.Pagina.Where(p => p.Iidpagina == oPaginaCLS.iidpagina).First();
                         oPagina.Accion = oPaginaCLS.accion;
                         oPagina.Mensaje = oPaginaCLS.mensaje;
+                        oPagina.Vbisible = oPaginaCLS.bvisible;
                         db.SaveChanges();
                         rpta = 1;
                     }
@@ -79,11 +81,13 @@ namespace MiPrimeraAppAngular.Controllers
                 {
                     oPaginaCLS = (from pagina in db.Pagina
                                   where pagina.Bhabilitado == 1
+                                  && pagina.Iidpagina==idPagina
                                   select new PaginaCLS
                                   {
                                       iidpagina = pagina.Iidpagina,
                                       accion = pagina.Accion,
-                                      mensaje = pagina.Mensaje
+                                      mensaje = pagina.Mensaje,
+                                      bvisible=(int)pagina.Vbisible
                                   }).First();
                 }
                 

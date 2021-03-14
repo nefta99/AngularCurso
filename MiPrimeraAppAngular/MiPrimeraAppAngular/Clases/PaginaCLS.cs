@@ -11,5 +11,6 @@ namespace MiPrimeraAppAngular.Clases
         public string mensaje { get; set; }
         public string accion { get; set; }
         public int bhabilitado  { get; set; }
+        public int bvisible { get; set; }
     }
 }

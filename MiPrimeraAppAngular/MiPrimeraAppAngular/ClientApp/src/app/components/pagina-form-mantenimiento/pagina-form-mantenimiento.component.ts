@@ -16,7 +16,9 @@ export class PaginaFormMantenimientoComponent implements OnInit {
     this.pagina = new FormGroup({
       "iidpagina": new FormControl("0"),
       "mensaje": new FormControl("", [Validators.required, Validators.maxLength(100)]),
-      "accion": new FormControl("", [Validators.required, Validators.maxLength(100)])
+      "accion": new FormControl("", [Validators.required, Validators.maxLength(100)]),
+      "bvisible": new FormControl("1")
+
     });
 
     this.activateRouter.params.subscribe(param => {
@@ -41,6 +43,7 @@ export class PaginaFormMantenimientoComponent implements OnInit {
           this.pagina.controls["iidpagina"].setValue(data.iidpagina);
           this.pagina.controls["mensaje"].setValue(data.mensaje);
           this.pagina.controls["accion"].setValue(data.accion);
+          this.pagina.controls["bvisible"].setValue(data.bvisible.toString());
         }
       });
     }

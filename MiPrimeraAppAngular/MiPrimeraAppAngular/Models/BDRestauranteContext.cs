@@ -32,7 +32,7 @@ namespace MiPrimeraAppAngular.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("server=L03036903L01\\SQLEXPRESS; database=BDRestaurante;Integrated Security=true");
+                optionsBuilder.UseSqlServer("server=L03036903L01\\SQLEXPRESS;Database=BDRestaurante;Integrated Security=true");
             }
         }
 
@@ -117,6 +117,8 @@ namespace MiPrimeraAppAngular.Models
                     .HasColumnName("MENSAJE")
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Vbisible).HasColumnName("VBISIBLE");
             });
 
             modelBuilder.Entity<PaginaTipoUsuario>(entity =>

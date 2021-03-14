@@ -74,6 +74,7 @@ namespace MiPrimeraAppAngular.Controllers
                                 on paginaTipo.Iidpagina equals pagina.Iidpagina
                                 where paginaTipo.Bhabilitado == 1
                                 && paginaTipo.Iidtipousuario == idTipoUsuario
+                                && pagina.Vbisible==1
                                 select new PaginaCLS
                                 {
                                     iidpagina = pagina.Iidpagina,
@@ -162,6 +163,7 @@ namespace MiPrimeraAppAngular.Controllers
                                      on paginaTipo.Iidpagina equals pagina.Iidpagina
                                      where usuario.Iidusuario == idUsuario
                                      && usuario.Iidtipousuario == idTipoUsuario
+                                     && paginaTipo.Bhabilitado == 1
                                      select new PaginaCLS
                                      {
                                          accion = pagina.Accion.Substring(1)

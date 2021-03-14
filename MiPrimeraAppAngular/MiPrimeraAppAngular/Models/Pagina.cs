@@ -14,6 +14,7 @@ namespace MiPrimeraAppAngular.Models
         public string Mensaje { get; set; }
         public string Accion { get; set; }
         public int? Bhabilitado { get; set; }
+        public int? Vbisible { get; set; }
 
         public ICollection<PaginaTipoUsuario> PaginaTipoUsuario { get; set; }
     }
