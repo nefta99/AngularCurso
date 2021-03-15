@@ -192,6 +192,10 @@ namespace MiPrimeraAppAngular.Models
 
                 entity.Property(e => e.Bhabilitado).HasColumnName("BHABILITADO");
 
+                entity.Property(e => e.Foto)
+                    .HasColumnName("foto")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Iidcategoria).HasColumnName("IIDCATEGORIA");
 
                 entity.Property(e => e.Iidmarca).HasColumnName("IIDMARCA");

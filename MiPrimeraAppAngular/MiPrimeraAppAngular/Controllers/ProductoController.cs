@@ -56,7 +56,8 @@ namespace MiPrimeraAppAngular.Controllers
                                                     idcategoria = (int)producto.Iidcategoria,
                                                     idmarca = (int)producto.Iidmarca,
                                                     precio = (decimal)producto.Precio,
-                                                    stock = (int)producto.Stock
+                                                    stock = (int)producto.Stock,
+                                                    foto=producto.Foto
                                                 }).First();
                     return oProductoCLS;
                 }
@@ -149,6 +150,7 @@ namespace MiPrimeraAppAngular.Controllers
                         oProducto.Stock = oProductoCLS.stock;
                         oProducto.Iidmarca = oProductoCLS.idmarca;
                         oProducto.Iidcategoria = oProductoCLS.idcategoria;
+                        oProducto.Foto = oProductoCLS.foto; 
                         oProducto.Bhabilitado = 1;
                         bd.Producto.Add(oProducto);
                         bd.SaveChanges();
@@ -163,6 +165,7 @@ namespace MiPrimeraAppAngular.Controllers
                         oProducto.Precio = oProductoCLS.precio;
                         oProducto.Stock = oProductoCLS.stock;
                         oProducto.Iidmarca = oProductoCLS.idmarca;
+                        oProducto.Foto = oProductoCLS.foto;
                         oProducto.Iidcategoria = oProductoCLS.idcategoria;
                         bd.SaveChanges();
                         rpta = 1;

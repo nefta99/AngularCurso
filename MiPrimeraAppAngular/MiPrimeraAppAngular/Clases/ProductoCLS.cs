@@ -14,5 +14,6 @@ namespace MiPrimeraAppAngular.Clases
         public string  nombreCategoria { get; set; }
         public int idmarca { get; set; }
         public int idcategoria { get; set; }
+        public string foto { get; set; }
     }
 }
